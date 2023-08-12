@@ -14,9 +14,11 @@
     href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap"
     rel="stylesheet"
   />
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
 
   <!-- Scripts -->
-  @vite(['resources/css/style.css', 'resources/js/app.js'])
+  {{--  @vite(['resources/css/style.css', 'resources/js/menu.js'])--}}
+  <script src="{{ asset('js/menu.js') }}"></script>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -28,7 +30,11 @@
 <body>
 <header class="header">
   <div class="box-brand">
-    <h1>ไอเดียทรงผม</h1>
+      <h1>
+    <a href="{{ url('/') }}">
+        ไอเดียทรงผม
+    </a>
+      </h1>
   </div>
   <div class="search">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">

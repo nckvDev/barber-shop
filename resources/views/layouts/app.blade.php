@@ -14,9 +14,11 @@
     href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap"
     rel="stylesheet"
   />
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
 
   <!-- Scripts -->
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  {{--  @vite(['resources/css/style.css', 'resources/js/menu.js'])--}}
+  <script src="{{ asset('js/menu.js') }}"></script>
 </head>
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100">
