@@ -24,6 +24,8 @@ class AdminController extends Controller
     $data = $request->validate([
       'title' => 'required',
       'sub_title' => 'required',
+      'category' => 'required',
+      'sub_category' => 'required',
       'description' => 'required'
     ]);
 
@@ -45,9 +47,12 @@ class AdminController extends Controller
   }
 
   public function view($id) {
-    $hairs = Hair::find($id);
-    if (!$hairs) abort(404);
-    $images = $hairs->images;
-    return view('view', compact('hairs', 'images'));
+    $hairs = Hair::all();
+
+    $hair = Hair::find($id);
+    if (!$hair) abort(404);
+    $images = $hair->images;
+
+    return view('view', compact('hairs','hair', 'images'));
   }
 }

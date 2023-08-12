@@ -78,6 +78,31 @@
                   <input type="text" name="sub_title"
                          class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
+                <div class="mb-4 flex gap-4">
+                  <div class="grow">
+                    <label for="category" class="block text-sm font-medium leading-6 text-gray-900">Category</label>
+                    <select name="category"
+                            class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                      <option value="">เลือก</option>
+                      <option value="0">ทรงผม</option>
+                      <option value="1">สไตล์ผม</option>
+                      <option value="2">สีผม</option>
+                      <option value="3">การดูแลผม</option>
+                      <option value="4">ผลิตภัณฑ์ดูแลผม</option>
+                      <option value="5">ร้าน</option>
+                    </select>
+                  </div>
+                  <div class="grow">
+                    <label for="sub_category" class="block text-sm font-medium leading-6 text-gray-900">Sub-category</label>
+                    <select name="sub_category"
+                            class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                      <option value="">เลือก</option>
+                      <option value="0">ประเภทผม</option>
+                      <option value="1">รูปหน้า</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-4"></div>
                 <div class="mb-4">
                   <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
                   <textarea rows="6" name="description" type="text"
