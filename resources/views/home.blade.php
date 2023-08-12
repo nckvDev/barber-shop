@@ -36,7 +36,8 @@
 <body>
 <div class="contain">
 {{--  <div id="header"></div>--}}
-  @include('components.header')
+{{--  @include('components.header')--}}
+  <x-header :items="$hairs"/>
   <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('sub_title');
             $table->text('description');
+            $table->integer('category')->default(0);
+            $table->integer('sub_category')->default(0);
             $table->timestamps();
         });
     }

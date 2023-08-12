@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 
 class HairController extends Controller
 {
-  public function index()
+  public function home() {
+    $hairs = Hair::all();
+    return view('home', compact('hairs'));
+  }
+  public function hair($id)
   {
     $hairs = Hair::all();
-    return view('admin.HairManage.index', compact('hairs'));
-  }
 
+    $hair = Hair::find($id);
+    if (!$hair) abort(404);
+    $images = $hair->images;
+
+    return view('hair', compact('hairs', 'hair', 'images'));
+  }
 }

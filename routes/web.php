@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  return view('home');
-});
+Route::get('/', [HairController::class, 'home']);
 
 Route::get('admin/dashboard', function () {
   return view('dashboard');
@@ -36,3 +34,5 @@ Route::get('/admin', [AdminController::class, 'AdminDashboard'])->name('admin.da
 Route::get('/admin/hair-manage', [AdminController::class, 'Hair'])->name('admin.hair-manage');
 Route::post('/admin/add-hair', [AdminController::class, 'store'])->name('addHair');
 Route::get('view/{id}', [AdminController::class, 'view']);
+
+Route::get('hair/{id}', [HairController::class, 'hair']);

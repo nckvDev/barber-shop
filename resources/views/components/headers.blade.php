@@ -47,27 +47,16 @@
       <div id="myDropdownOne" class="dropdown-content-one">
         <div>
           <h5>ประเภทผม</h5>
-          @foreach($items as $item)
-            @if($item->category === 0 && $item->sub_category === 0)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-            {{--          <a href="/straight-hair.html">ทรงผมตรง</a>--}}
-            {{--          <a href="/curly-hair.html">ทรงผมหยิก</a>--}}
-            {{--          <a href="/thin-hair.html">ผมบาง</a>--}}
-            {{--          <a href="/thick-hair.html">ผมหนา</a>--}}
-          @endforeach
+          <a href="/straight-hair.html">ทรงผมตรง</a>
+          <a href="/curly-hair.html">ทรงผมหยิก</a>
+          <a href="/thin-hair.html">ผมบาง</a>
+          <a href="/thick-hair.html">ผมหนา</a>
         </div>
         <div>
           <h5>รูปหน้า</h5>
-          @foreach($items as $item)
-            @if($item->category === 0 && $item->sub_category === 1)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-          {{--            <a href="{{ url('/hair/'.$face->id) }}">{{$face->title}}</a>--}}
-          {{--          <a href="/round-face.html">หน้ากลม</a>--}}
-          {{--          <a href="/oval-face.html">หน้ารูปไข่</a>--}}
-          {{--          <a href="/square-face.html">หน้าเหลี่ยม</a>--}}
+          <a href="/round-face.html">หน้ากลม</a>
+          <a href="/oval-face.html">หน้ารูปไข่</a>
+          <a href="/square-face.html">หน้าเหลี่ยม</a>
         </div>
       </div>
     </li>
