@@ -28,7 +28,7 @@
         </div>
         <div class="d-flex gap-2 mt-4">
           <span class="capsule"> <a href="/salon-detail.html">ภาพรวม</a> </span>
-          <span class="capsule"><a href="/salon-review.html">รีวิว</a> </span>
+          <span class="capsule"><a href="{{url('/shop/'.$shop->id.'/review') }}">รีวิว</a> </span>
         </div>
       </div>
       <div class="col-8 d-flex align-items-center px-4">
