@@ -21,7 +21,7 @@ class AdminController extends Controller
   }
 
   public function store(Request $request) {
-//    dd($request->title, $request->sub_title, $request->description, $request->images);
+
     $data = $request->validate([
       'title' => 'required',
       'sub_title' => 'required',
@@ -63,7 +63,7 @@ class AdminController extends Controller
   }
 
   public function storeShop(Request $request) {
-//    dd($request);
+
      $request->validate([
       'shop_name' => 'required',
       'status' => 'required',
@@ -76,7 +76,6 @@ class AdminController extends Controller
     $shopImage = $request->file('shop_image');
     $mapImage = $request->file('map_image');
 
-//    dd($shopImage, $mapImage->extension());
     $imgShopName = 'shop'.'-image-'.time().rand(1,1000).'.'.$shopImage->extension();
     $imgMapName = 'map'.'-image-'.time().rand(1,1000).'.'.$mapImage->extension();
 
@@ -92,22 +91,6 @@ class AdminController extends Controller
       'map_image' => $imgMapName,
     ]);
 
-//
-//    $new_hairStyle = Hair::create($data);
-//
-//    if ($request->has('images')) {
-//      foreach ($request->file('images') as $image) {
-//        $imageName = $data['title'].'-image-'.time().rand(1,1000).'.'.$image->extension();
-//        $image->move(public_path('hair_image'), $imageName);
-//
-//        Image::create([
-//          'hair_id' => $new_hairStyle->id,
-//          'image' => $imageName
-//        ]);
-//      }
-//    }
-
-//
     return back()->with('success', 'Add');
   }
 }
