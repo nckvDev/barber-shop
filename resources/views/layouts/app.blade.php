@@ -15,9 +15,10 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+{{--  <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />--}}
 
   <!-- Scripts -->
-  {{--  @vite(['resources/css/style.css', 'resources/js/menu.js'])--}}
+    @vite(['resources/css/app.css', 'resources/js/menu.js'])
   <script src="{{ asset('js/menu.js') }}"></script>
 </head>
 <body class="font-sans antialiased">
