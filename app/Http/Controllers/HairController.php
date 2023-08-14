@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hair;
+use App\Models\Review;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 
@@ -50,5 +51,22 @@ class HairController extends Controller
     $shop = Shop::find($id);
 
     return view('shopReview', compact('hairs', 'shops', 'shop'));
+  }
+
+  public function storeReview(Request $request, $id) {
+
+    $request->validate([
+      'review_text' => 'required|min:5',
+    ]);
+
+    $user_id = auth()->user()->id; // Assuming user is logged in
+
+    Review::create([
+      'user_id' =>  $user_id,
+      'shop_id' => $id,
+      'review_text' => $request['review_text'],
+    ]);
+
+    return back()->with('success', 'Review created successfully.');
   }
 }

@@ -17,7 +17,7 @@
 <body>
 <div class="contain">
 {{--  @include('components.header')--}}
-  <x-header :items="$hairs" />
+  <x-header :items="$hairs" :shops="$shops"/>
   <div class="px-3 pb-3">
     <div style="text-align: center;">
       <h1 class="title">{{$hair->title}}</h1>

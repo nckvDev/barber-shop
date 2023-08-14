@@ -48,3 +48,5 @@ Route::get('hair/{id}', [HairController::class, 'hair']);
 Route::get('/shop', [HairController::class, 'shop']);
 Route::get('/shop/{id}', [HairController::class, 'shopDetail']);
 Route::get('/shop/{id}/review', [HairController::class, 'shopReview']);
+
+Route::post('/shop/{id}/review', [HairController::class, 'storeReview'])->name('addReview');

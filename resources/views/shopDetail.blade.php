@@ -23,7 +23,7 @@
   <div>
     <section class="row my-4">
       <div class="col-4">
-        <div>
+        <div class="shop-image">
           <img src="/shop_image/{{$shop->shop_image}}"/>
         </div>
         <div class="d-flex gap-2 mt-4">

@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
 
   <!-- Scripts -->
-  {{--  @vite(['resources/css/style.css', 'resources/js/menu.js'])--}}
+  @vite(['resources/css/app.css', 'resources/js/menu.js'])
   <script src="{{ asset('js/menu.js') }}"></script>
 </head>
 <body>
@@ -23,7 +23,7 @@
   <div>
     <section class="row my-4">
       <div class="col-4">
-        <div>
+        <div class="shop-image">
           <img src="/shop_image/{{$shop->shop_image}}"/>
         </div>
         <div class="d-flex gap-2 mt-4">
@@ -33,62 +33,84 @@
       </div>
       <div class="col-8 d-flex align-items-center px-4">
         <div>
-          <h3>ดรีมเวิลด์ ซาลอน</h3>
-          <p class="text-success">เปิดอยู่</p>
+          <h3>{{$shop->shop_name}}</h3>
+          <p
+            class="{{$shop->status === 'active' ? 'text-success' : 'text-danger'}}">{{$shop->status === 'active' ? 'เปิดอยู่' : 'ปิดอยู่'}}</p>
         </div>
       </div>
     </section>
-    @guest()
-      <h1>login</h1>
-      <h1>register</h1>
-      <section>
-        <div class="mb-4">
-          <div class="d-flex gap-3 mb-2">
-            <img src="/images/png/salon/profile1.png"/>
-            <span>Somchai</span>
-          </div>
-          <div class="px-5">บริการดีมาก ๆ ประทับใจสุด</div>
+    <section>
+      <div class="mb-4">
+        <div class="d-flex gap-3 mb-2">
+          <img src="/images/png/salon/profile1.png"/>
+          <span>Somchai</span>
         </div>
-      </section>
+        <div class="px-5">บริการดีมาก ๆ ประทับใจสุด</div>
+      </div>
+    </section>
+    <hr>
+    @guest()
+      <div class="d-flex gap-4">
+        <a href="{{ route('login') }}">
+          <button class="btn btn-success">
+            ล็อกอิน
+          </button>
+        </a>
+        <a href="{{ route('register')}}">
+          <button class="btn btn-outline-secondary">
+            สมัครสมาชิก
+          </button>
+        </a>
+      </div>
+
     @endguest
     @auth
       <section>
-        <div class="mb-4">
-          <div class="d-flex gap-3 mb-2">
-            <img src="/images/png/salon/profile1.png"/>
-            <span>Somchai</span>
-          </div>
-          <div class="px-5">บริการดีมาก ๆ ประทับใจสุด</div>
-        </div>
+        <form method="POST" action="{{ route('addReview', $shop->id) }}">
+          @csrf
+          <h4>Comment</h4>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="review_text"></textarea>
+          <x-input-error :messages="$errors->get('review_text')" class="my-2" />
+          <button type="submit" class="btn btn-success mt-4">Review</button>
+        </form>
       </section>
-      <section>
-        <h4>Comment</h4>
-        <textarea rows="4" name="comment"/>
-      </section>
+      <hr>
+      <!-- Authentication -->
+      <div class="d-flex justify-content-end">
+        <form method="POST" action="{{ route('logout') }}">
+          @csrf
+
+          <x-dropdown-link :href="route('logout')"
+                           onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+            {{ __('Log Out') }}
+          </x-dropdown-link>
+        </form>
+      </div>
     @endauth
-{{--    <section>--}}
-{{--      <div class="mb-4">--}}
-{{--        <div class="d-flex gap-3 mb-2">--}}
-{{--          <img src="/images/png/salon/profile1.png"/>--}}
-{{--          <span>Somchai</span>--}}
-{{--        </div>--}}
-{{--        <div class="px-5">บริการดีมาก ๆ ประทับใจสุด</div>--}}
-{{--      </div>--}}
-{{--      <div class="mb-4">--}}
-{{--        <div class="d-flex gap-3 mb-2">--}}
-{{--          <img src="/images/png/salon/profile2.png"/>--}}
-{{--          <span>รัตนาวรรณ ทองเอก</span>--}}
-{{--        </div>--}}
-{{--        <div class="px-5">ช่างแนะนำดีมากค่ะ</div>--}}
-{{--      </div>--}}
-{{--      <div>--}}
-{{--        <div class="d-flex gap-3 mb-2">--}}
-{{--          <img src="/images/png/salon/profile3.png"/>--}}
-{{--          <span>panupong</span>--}}
-{{--        </div>--}}
-{{--        <div class="px-5">ราคาเป็นกันเอง แนะนำ</div>--}}
-{{--      </div>--}}
-{{--    </section>--}}
+    {{--    <section>--}}
+    {{--      <div class="mb-4">--}}
+    {{--        <div class="d-flex gap-3 mb-2">--}}
+    {{--          <img src="/images/png/salon/profile1.png"/>--}}
+    {{--          <span>Somchai</span>--}}
+    {{--        </div>--}}
+    {{--        <div class="px-5">บริการดีมาก ๆ ประทับใจสุด</div>--}}
+    {{--      </div>--}}
+    {{--      <div class="mb-4">--}}
+    {{--        <div class="d-flex gap-3 mb-2">--}}
+    {{--          <img src="/images/png/salon/profile2.png"/>--}}
+    {{--          <span>รัตนาวรรณ ทองเอก</span>--}}
+    {{--        </div>--}}
+    {{--        <div class="px-5">ช่างแนะนำดีมากค่ะ</div>--}}
+    {{--      </div>--}}
+    {{--      <div>--}}
+    {{--        <div class="d-flex gap-3 mb-2">--}}
+    {{--          <img src="/images/png/salon/profile3.png"/>--}}
+    {{--          <span>panupong</span>--}}
+    {{--        </div>--}}
+    {{--        <div class="px-5">ราคาเป็นกันเอง แนะนำ</div>--}}
+    {{--      </div>--}}
+    {{--    </section>--}}
   </div>
 </div>
 </body>
