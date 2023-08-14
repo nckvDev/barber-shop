@@ -316,3 +316,9 @@ span a:hover {
   height: 136px;
   object-fit: cover;
 }
+
+.avatar > img {
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
+}

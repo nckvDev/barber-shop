@@ -39,15 +39,23 @@
         </div>
       </div>
     </section>
+    @foreach($reviews as $review)
     <section>
       <div class="mb-4">
         <div class="d-flex gap-3 mb-2">
-          <img src="/images/png/salon/profile1.png"/>
-          <span>Somchai</span>
+          @if($review->user->profile !== null)
+          <img src="/profile_image/{{$review->user->profile}}"/>
+          @else
+            <div class="avatar">
+             <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/b5/b5792903c17cade8baf8ecfa533142806169cc52_full.jpg"/>
+            </div>
+          @endif
+          <span>{{$review->user->name}}</span>
         </div>
-        <div class="px-5">บริการดีมาก ๆ ประทับใจสุด</div>
+        <div class="px-5">{{ $review->review_text }}</div>
       </div>
     </section>
+    @endforeach
     <hr>
     @guest()
       <div class="d-flex gap-4">

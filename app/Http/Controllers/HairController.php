@@ -47,10 +47,11 @@ class HairController extends Controller
   public function shopReview($id) {
     $hairs = Hair::all();
     $shops = Shop::all();
+    $reviews = Review::where('shop_id', $id)->get();
 
     $shop = Shop::find($id);
 
-    return view('shopReview', compact('hairs', 'shops', 'shop'));
+    return view('shopReview', compact('hairs', 'shops', 'shop', 'reviews'));
   }
 
   public function storeReview(Request $request, $id) {
