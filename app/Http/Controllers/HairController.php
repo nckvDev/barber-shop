@@ -24,4 +24,22 @@ class HairController extends Controller
 
     return view('hair', compact('hairs', 'shops', 'hair', 'images'));
   }
+
+  public function shop() {
+    $hairs = Hair::all();
+    $shops = Shop::all();
+
+    return view('shop', compact('shops','hairs' ));
+  }
+
+  public function shopDetail($id) {
+    $hairs = Hair::all();
+    $shops = Shop::all();
+
+    $days = array("วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัส", "วันศุกร์", "วันเสาร์", "วันอาทิตย์");
+
+    $shop = Shop::find($id);
+
+    return view('shopDetail', compact('shops', 'hairs', 'shop', 'days'));
+  }
 }

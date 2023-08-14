@@ -30,11 +30,11 @@
 <body>
 <header class="header">
   <div class="box-brand">
-      <h1>
-    <a href="{{ url('/') }}">
+    <h1>
+      <a href="{{ url('/') }}">
         ไอเดียทรงผม
-    </a>
-      </h1>
+      </a>
+    </h1>
   </div>
   <div class="search">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
@@ -57,10 +57,6 @@
             @if($item->category === 0 && $item->sub_category === 0)
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
-            {{--          <a href="/straight-hair.html">ทรงผมตรง</a>--}}
-            {{--          <a href="/curly-hair.html">ทรงผมหยิก</a>--}}
-            {{--          <a href="/thin-hair.html">ผมบาง</a>--}}
-            {{--          <a href="/thick-hair.html">ผมหนา</a>--}}
           @endforeach
         </div>
         <div>
@@ -70,10 +66,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-          {{--            <a href="{{ url('/hair/'.$face->id) }}">{{$face->title}}</a>--}}
-          {{--          <a href="/round-face.html">หน้ากลม</a>--}}
-          {{--          <a href="/oval-face.html">หน้ารูปไข่</a>--}}
-          {{--          <a href="/square-face.html">หน้าเหลี่ยม</a>--}}
         </div>
       </div>
     </li>
@@ -87,12 +79,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-{{--          <a href="/ponytail-hair.html">ผมหางม้า</a>--}}
-{{--          <a href="/short-hair.html">ผมซอยสั้น</a>--}}
-{{--          <a href="/bob-hair.html">ผมบ๊อบ</a>--}}
-{{--          <a href="/bangs-hair.html">ผมหน้าม้า</a>--}}
-{{--          <a href="/braided-hair.html">ผมถักเปีย</a>--}}
-{{--          <a href="/perm-hair.html">ดัดลอน</a>--}}
         </div>
         <div>
           <h5>รูปหน้า</h5>
@@ -101,9 +87,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-{{--          <a href="/round-face2.html">หน้ากลม</a>--}}
-{{--          <a href="/oval-face2.html">หน้ารูปไข่</a>--}}
-{{--          <a href="/square-face2.html">หน้าเหลี่ยม</a>--}}
         </div>
       </div>
     </li>
@@ -117,9 +100,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-{{--          <a href="/blonde-color.html">ผมบลอนด์</a>--}}
-{{--          <a href="/brown-color.html">ผมสีน้ำตาล</a>--}}
-{{--          <a href="/red-color.html">ผมสีแดง</a>--}}
         </div>
         <div>
           <h5>เทรนด์สีผม</h5>
@@ -128,7 +108,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-{{--          <a href="/highlight-color.html">ไฮไลด์</a>--}}
         </div>
       </div>
     </li>
@@ -142,8 +121,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-{{--          <a href="/lose-hair.html">ผมร่วง</a>--}}
-{{--          <a href="/dry-hair.html">ผมแห้งเสีย</a>--}}
         </div>
         <div>
           <h5>การดูแลทั่วไป</h5>
@@ -152,8 +129,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-{{--          <a href="/wash-hair.html">สระผม</a>--}}
-{{--          <a href="/treatment-hair.html">ทรีตเมนต์ผม</a>--}}
         </div>
       </div>
     </li>
@@ -167,10 +142,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-{{--          <a href="/shampoo.html">แชมพู</a>--}}
-{{--          <a href="/serum-hair.html">เซรั่มบำรุงผม</a>--}}
-{{--          <a href="/mask-hair.html">มาส์กผม</a>--}}
-{{--          <a href="/spray-hair.html">สเปรย์ฉีดผม</a>--}}
         </div>
         <div>
           <h5>แบรนด์</h5>
@@ -179,9 +150,6 @@
               <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
             @endif
           @endforeach
-{{--          <a href="/clear.html">Clear</a>--}}
-{{--          <a href="/dove.html">Dove</a>--}}
-{{--          <a href="/sunsilk.html">Sunsilk</a>--}}
         </div>
       </div>
     </li>
@@ -189,15 +157,14 @@
       <button onclick="myFunction(6)" class="dropbtnSix">ร้าน</button>
       <div id="myDropdownSix" class="dropdown-content-six">
         <div>
-          <h5>ชื่อร้าน</h5>
+          <a href="{{url('/shop')}}" class="">
+            <h5>
+              ชื่อร้าน
+            </h5>
+          </a>
           @foreach($shops as $shop)
-            <a href="#">{{ $shop->shop_name }}</a>
+            <a href="{{url('/shop/'.$shop->id)}}">{{ $shop->shop_name }}</a>
           @endforeach
-
-{{--          <a href="/salon.html">ดรีมเวิล ซาลอน</a>--}}
-{{--          <a href="#">พลอย ซาลอน</a>--}}
-{{--          <a href="#">90’ บาร์เบอร์</a>--}}
-{{--          <a href="#">น้ำฝน บิวตี้ซาลอน</a>--}}
         </div>
       </div>
     </li>

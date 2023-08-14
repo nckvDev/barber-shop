@@ -39,3 +39,6 @@ Route::get('/admin/shop-manage', [AdminController::class, 'Shop'])->name('admin.
 Route::post('/admin/add-shop', [AdminController::class, 'storeShop'])->name('addShop');
 
 Route::get('hair/{id}', [HairController::class, 'hair']);
+
+Route::get('/shop', [HairController::class, 'shop']);
+Route::get('/shop/{id}', [HairController::class, 'shopDetail']);
