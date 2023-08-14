@@ -14,7 +14,7 @@
       <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
 
       <!-- Scripts -->
-      {{--  @vite(['resources/css/style.css', 'resources/js/menu.js'])--}}
+        @vite(['resources/css/app.css', 'resources/js/menu.js'])
       <script src="{{ asset('js/menu.js') }}"></script>
     </head>
     <body class="font-sans text-gray-900 antialiased">

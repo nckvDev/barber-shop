@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --font-color: #1e1e1e;
   --circle-color: #f7d211;
