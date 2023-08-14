@@ -38,7 +38,7 @@
 <div class="contain">
 {{--  <div id="header"></div>--}}
 {{--  @include('components.header')--}}
-  <x-header :items="$hairs"/>
+  <x-header :items="$hairs" :shops="$shops"/>
   <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
