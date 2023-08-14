@@ -12,9 +12,11 @@ class Header extends Component
      * Create a new component instance.
      */
     public $items;
-    public function __construct($items)
+    public $shops;
+    public function __construct($items, $shops)
     {
       $this->items = $items;
+      $this->shops = $shops;
     }
 
     /**
