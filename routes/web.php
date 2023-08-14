@@ -16,11 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HairController::class, 'home']);
+Route::get('/', [HairController::class, 'home'])->name('home');
 
-Route::get('admin/dashboard', function () {
-  return view('dashboard');
-})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,15 +27,26 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/admin', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
-Route::get('/admin/hair-manage', [AdminController::class, 'Hair'])->name('admin.hair-manage');
-Route::post('/admin/add-hair', [AdminController::class, 'store'])->name('addHair');
-Route::get('view/{id}', [AdminController::class, 'view']);
+Route::middleware(['auth', 'role:admin'])->group(function () {
 
-Route::get('/admin/shop-manage', [AdminController::class, 'Shop'])->name('admin.shop-manage');
-Route::post('/admin/add-shop', [AdminController::class, 'storeShop'])->name('addShop');
+  Route::get('admin/dashboard', function () {
+    return view('dashboard');
+  })->middleware(['auth', 'verified'])->name('admin.dashboard');
+
+  Route::get('/admin', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+  Route::get('/admin/hair-manage', [AdminController::class, 'Hair'])->name('admin.hair-manage');
+  Route::post('/admin/add-hair', [AdminController::class, 'store'])->name('addHair');
+  Route::get('view/{id}', [AdminController::class, 'view']);
+
+  Route::get('/admin/shop-manage', [AdminController::class, 'Shop'])->name('admin.shop-manage');
+  Route::post('/admin/add-shop', [AdminController::class, 'storeShop'])->name('addShop');
+});
+
 
 Route::get('hair/{id}', [HairController::class, 'hair']);
 
 Route::get('/shop', [HairController::class, 'shop']);
 Route::get('/shop/{id}', [HairController::class, 'shopDetail']);
+Route::get('/shop/{id}/review', [HairController::class, 'shopReview']);
+
+Route::post('/shop/{id}/review', [HairController::class, 'storeReview'])->name('addReview');

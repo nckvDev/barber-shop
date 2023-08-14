@@ -25,13 +25,13 @@
 
       <section class="row mt-4">
         <div class="col-4">
-          <div>
+          <div class="shop-image">
             <img src="/shop_image/{{$shop->shop_image}}" />
           </div>
           <div class="d-flex gap-2 mt-4">
-            <span class="capsule"> บริการ </span>
-            <span class="capsule"> เส้นทาง</span>
-            <span class="capsule"> โทร </span>
+            <span class="capsule"> <a href="{{url('/shop/'.$shop->id) }}">บริการ</a>  </span>
+            <span class="capsule"> <a href="{{url('/shop/'.$shop->id) }}">เส้นทาง</a> </span>
+            <span class="capsule"><a href="{{url('/shop/'.$shop->id) }}">โทร</a>  </span>
           </div>
         </div>
         <div class="col-8 d-flex align-items-center px-4">

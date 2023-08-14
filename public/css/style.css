@@ -310,3 +310,9 @@ span a:hover {
   text-decoration: underline;
   color: #1e1e1e;
 }
+/*width="202" height="136"*/
+.shop-image > img {
+  width: 202px;
+  height: 136px;
+  object-fit: cover;
+}

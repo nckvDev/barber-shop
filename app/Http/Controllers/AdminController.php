@@ -49,12 +49,13 @@ class AdminController extends Controller
 
   public function view($id) {
     $hairs = Hair::all();
+    $shops = Shop::all();
 
     $hair = Hair::find($id);
     if (!$hair) abort(404);
     $images = $hair->images;
 
-    return view('view', compact('hairs','hair', 'images'));
+    return view('view', compact('hairs', 'shops','hair', 'images'));
   }
 
   public function Shop() {

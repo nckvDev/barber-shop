@@ -36,16 +36,24 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+      $profile = $request->file('profile');
+
+      $profileName = 'profile'.'-image-'.time().rand(1,1000).'.'.$profile->extension();
+
+      $profile->move(public_path('profile_image'), $profileName);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'profile' => $profileName,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+//        return redirect(RouteServiceProvider::HOME);
+        return redirect('/shop');
     }
 }
