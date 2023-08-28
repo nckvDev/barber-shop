@@ -43,7 +43,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
   Route::get('/admin/hair-delete/{id}', [AdminController::class, 'delete']);
 
   Route::get('/admin/shop-manage', [AdminController::class, 'Shop'])->name('admin.shop-manage');
-  Route::post('/admin/add-shop', [AdminController::class, 'storeShop'])->name('addShop');
+  Route::post('/admin/addShop', [AdminController::class, 'storeShop'])->name('addShop');
+  Route::get('/admin/add-shop', [AdminController::class, 'addShop'])->name('add-Shop');
+  Route::get('/admin/shop-edit/{id}', [AdminController::class, 'editShop']);
+  Route::post('/admin/shop-update/{id}', [AdminController::class, 'updateShop']);
+  Route::get('/admin/shop-delete/{id}', [AdminController::class, 'deleteShop']);
 });
 
 

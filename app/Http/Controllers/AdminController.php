@@ -6,6 +6,7 @@ use App\Models\Hair;
 use App\Models\Image;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -122,8 +123,12 @@ class AdminController extends Controller
     return view('admin.ShopManage.index', compact('shops'));
   }
 
-  public function storeShop(Request $request) {
+  public function addShop()
+  {
+    return view('admin.ShopManage.add');
+  }
 
+  public function storeShop(Request $request) {
      $request->validate([
       'shop_name' => 'required',
       'status' => 'required',
@@ -151,6 +156,80 @@ class AdminController extends Controller
       'map_image' => $imgMapName,
     ]);
 
-    return back()->with('success', 'Add');
+    return redirect()->route('admin.shop-manage')->with('success', 'Add');
   }
+
+  public function editShop($id)
+  {
+    $shop = Shop::find($id);
+    return view('admin.ShopManage.edit', compact('shop'));
+  }
+
+  public function updateShop(Request $request, $id) {
+    $request->validate([
+      'shop_name' => 'required',
+      'status' => 'required',
+      'phone_number' => 'required',
+      'open_hours' => 'required',
+    ]);
+
+    $shop = Shop::findOrFail($id);
+
+    if ($request->hasFile('shop_image')) {
+      // Remove old shop image if it exists
+      if ($shop->shop_image) {
+        Storage::delete('public/shop_image/' . $shop->shop_image);
+//        unlink('/public/shop_image/'.$shop->shop_image);
+      }
+
+      $shopImage = $request->file('shop_image');
+      $imgShopName = 'shop'.'-image-'.time().rand(1,1000).'.'.$shopImage->extension();
+      $shopImage->move(public_path('shop_image'), $imgShopName);
+//      $shopImage->storeAs('public/shop_image', $imgShopName);
+      $shop->shop_image = $imgShopName;
+    }
+
+    if ($request->hasFile('map_image')) {
+      // Remove old map image if it exists
+      if ($shop->map_image) {
+        Storage::delete('public/shop_image/' . $shop->map_image);
+//        unlink('shop_image/'.$shop->map_image);
+      }
+
+      $mapImage = $request->file('map_image');
+      $imgMapName = 'map'.'-image-'.time().rand(1,1000).'.'.$mapImage->extension();
+      $mapImage->move(public_path('shop_image'), $imgMapName);
+//      $mapImage->storeAs('public/shop_image', $imgMapName);
+      $shop->map_image = $imgMapName;
+    }
+
+    $shop->shop_name = $request->input('shop_name');
+    $shop->status = $request->input('status');
+    $shop->phone_number = $request->input('phone_number');
+    $shop->open_hours = $request->input('open_hours');
+    $shop->save();
+
+    return redirect()->route('admin.shop-manage')->with('success', 'Update');
+  }
+
+  public function deleteShop($id) {
+    $shop = Shop::findOrFail($id);
+
+    // Delete shop image if it exists
+    if ($shop->shop_image) {
+      Storage::delete('public/shop_image/' . $shop->shop_image);
+    }
+
+    // Delete map image if it exists
+    if ($shop->map_image) {
+      Storage::delete('public/shop_image/' . $shop->map_image);
+    }
+
+    // Delete the shop record
+    $shop->delete();
+
+    return redirect()->route('admin.shop-manage')->with('success', 'Shop deleted successfully');
+  }
+
+
 }

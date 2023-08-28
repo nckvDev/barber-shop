@@ -11,7 +11,7 @@
         <div class="p-6 text-gray-900">
           <div>
             @if(session('success'))
-{{--              <h3 class="text-green-600">Add Success !</h3>--}}
+              {{--              <h3 class="text-green-600">Add Success !</h3>--}}
               <script>
                 Swal.fire({
                   position: 'center',
@@ -26,7 +26,7 @@
           <div>
             <div class="mb-4">
               <a href="{{ route('add-Hair') }}"
-                 class="rounded-md  bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                 class="rounded-md  bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
                 Add Hair Style
               </a>
             </div>
@@ -43,20 +43,20 @@
               <tbody>
               @forelse($hairs as $hair)
                 <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 ">
-                  <td class=" px-6 py-4 font-medium">
+                  <td class="px-6 py-4 font-medium">
                     {{ $hair->id }}
                   </td>
-                  <td class=" px-6 py-4">
+                  <td class="px-6 py-4">
                     <div class="w-max">
                       {{ $hair->title }}
                     </div>
                   </td>
-                  <td class=" px-6 py-4  ">
+                  <td class="px-6 py-4">
                     <div class="line-clamp-2 hover:line-clamp-none transition delay-1000 ">
                       {{ $hair->sub_title }}
                     </div>
                   </td>
-                  <td class=" px-6 py-4 ">
+                  <td class="px-6 py-4">
                     <div class="line-clamp-2 hover:line-clamp-none transition delay-1000">
                       {{ $hair->description }}
                     </div>
