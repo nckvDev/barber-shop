@@ -35,8 +35,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
   Route::get('/admin', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
   Route::get('/admin/hair-manage', [AdminController::class, 'Hair'])->name('admin.hair-manage');
-  Route::post('/admin/add-hair', [AdminController::class, 'store'])->name('addHair');
+  Route::post('/admin/add', [AdminController::class, 'store'])->name('addHair');
+  Route::get('/admin/add-hair', [AdminController::class, 'add'])->name('add-Hair');
   Route::get('view/{id}', [AdminController::class, 'view']);
+  Route::get('/admin/hair-edit/{id}', [AdminController::class, 'edit']);
+  Route::post('/admin/hair-update/{id}', [AdminController::class, 'update']);
+  Route::get('/admin/hair-delete/{id}', [AdminController::class, 'delete']);
 
   Route::get('/admin/shop-manage', [AdminController::class, 'Shop'])->name('admin.shop-manage');
   Route::post('/admin/add-shop', [AdminController::class, 'storeShop'])->name('addShop');

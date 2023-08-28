@@ -20,6 +20,11 @@ class AdminController extends Controller
     return view('admin.HairManage.index', compact('hairs'));
   }
 
+  public function add()
+  {
+    return view('admin.HairManage.add');
+  }
+
   public function store(Request $request) {
 
     $data = $request->validate([
@@ -44,7 +49,7 @@ class AdminController extends Controller
       }
     }
 
-    return back()->with('success', 'Add');
+    return redirect()->route('admin.hair-manage')->with('success', 'Add');
   }
 
   public function view($id) {
@@ -56,6 +61,60 @@ class AdminController extends Controller
     $images = $hair->images;
 
     return view('view', compact('hairs', 'shops','hair', 'images'));
+  }
+
+  public function edit($id)
+  {
+    $hair = Hair::find($id);
+    return view('admin.HairManage.edit', compact('hair'));
+  }
+
+  public function update(Request $request, $id)
+  {
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'category' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $hairStyle = Hair::findOrFail($id);
+
+    // Update the model attributes
+    $hairStyle->update($data);
+
+    // Handle image updates
+    if ($request->has('images')) {
+      $newImages = [];
+
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_image'), $imageName);
+
+        $newImages[] = [
+          'hair_id' => $hairStyle->id,
+          'image' => $imageName
+        ];
+      }
+
+      Image::where('hair_id', $hairStyle->id)->delete();
+
+      Image::create($newImages);
+    }
+
+    return redirect()->route('admin.hair-manage')->with('success', 'Update');
+  }
+
+  public function delete($id)
+  {
+    $hairStyle = Hair::findOrFail($id);
+
+    Image::where('hair_id', $hairStyle->id)->delete();
+
+    $hairStyle->delete();
+
+    return redirect()->back()->with('success', 'Delete');
   }
 
   public function Shop() {
