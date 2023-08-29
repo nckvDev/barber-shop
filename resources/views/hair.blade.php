@@ -40,9 +40,9 @@
       {{--      <img src="/images/png/short-hair/short4.png" />--}}
     </div>
     <div class="mt-2 content">
-      <p class="mt-4 mb-0">
+      <pre class="mt-4 mb-0">
         {{$hair->description}}
-      </p>
+      </pre>
     </div>
   </div>
 </div>

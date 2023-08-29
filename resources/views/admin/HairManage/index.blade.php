@@ -11,116 +11,74 @@
         <div class="p-6 text-gray-900">
           <div>
             @if(session('success'))
-              <h3 class="text-green-600">Add Success !</h3>
+              {{--              <h3 class="text-green-600">Add Success !</h3>--}}
+              <script>
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'บันทึกข้อมูลสำเร็จ',
+                  showConfirmButton: false,
+                  timer: 3000
+                })
+              </script>
             @endif
           </div>
-          <div class="grid grid-cols-3 gap-4">
-            <div class="col-span-2">
-              <h3>Hair Style</h3>
-              <table class="w-full  border-collapse text-sm rounded-l">
-                <thead>
-                <tr>
-                  <th class="border border-slate-400">id</th>
-                  <th class="border border-slate-400 p-2">Title</th>
-                  <th class="border border-slate-400">Sub Title</th>
-                  <th class="border border-slate-400">Description</th>
-                  <th class="border border-slate-400 p-4">View</th>
+          <div>
+            <div class="mb-4">
+              <a href="{{ route('add-Hair') }}"
+                 class="rounded-md  bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                Add Hair Style
+              </a>
+            </div>
+            <table class="min-w-full text-left text-sm font-light">
+              <thead class="border-b font-medium dark:border-neutral-500">
+              <tr>
+                <th scope="col" class="px-6 py-4">id</th>
+                <th scope="col" class="px-6 py-4">Title</th>
+                <th scope="col" class="px-6 py-4">Sub Title</th>
+                <th scope="col" class="px-6 py-4">Description</th>
+                <th scope="col" class="px-6 py-4">Manage</th>
+              </tr>
+              </thead>
+              <tbody>
+              @forelse($hairs as $hair)
+                <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 ">
+                  <td class="px-6 py-4 font-medium">
+                    {{ $hair->id }}
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="w-max">
+                      {{ $hair->title }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000 ">
+                      {{ $hair->sub_title }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000">
+                      {{ $hair->description }}
+                    </div>
+                  </td>
+                  <td class=" px-6 py-4">
+                    <div class="w-max">
+                      <a href="{{ url('/admin/hair-edit/'.$hair->id) }}"
+                         class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">edit</a>
+                      <a href="{{ url('/admin/hair-delete/'.$hair->id) }}"
+                         class="text-red-500 font-semibold border border-red-500 rounded-md px-2 py-1 hover:bg-red-500 hover:text-white transition">delete</a>
+                    </div>
+                  </td>
                 </tr>
-                </thead>
-                <tbody>
-                @forelse($hairs as $hair)
-                  <tr>
-                    <td class="border border-slate-400 ">
-                      <div class="w-max p-4">
-                        {{ $hair->id }}
-                      </div>
-                    </td>
-                    <td class="border border-slate-400 ">
-                      <div class="w-max p-4">
-                        {{ $hair->title }}
-                      </div>
-                    </td>
-                    <td class="border border-slate-400 w-1/4">
-                      <div class="px-4 line-clamp-2 hover:line-clamp-none">
-                        {{ $hair->sub_title }}
-                      </div>
-                    </td>
-                    <td class="border border-slate-400 ">
-                      <div class="px-4 line-clamp-2 hover:line-clamp-none">
-                        {{ $hair->description }}
-                      </div>
-                    </td>
-                    <td class="border border-slate-400 text-center">
-                      <a href="{{ url('/view/'.$hair->id) }}">view</a>
-                    </td>
-                  </tr>
-                @empty
-                  <tr>
-                    <td colspan="3" class="text-center py-4 bg-gray-100">
-                      No Hair Style
-                    </td>
-                  </tr>
-                @endforelse
-                </tbody>
-              </table>
-            </div>
-            <div>
-              <h3>Add Hair Style</h3>
-              <form action="{{ route('addHair') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-4">
-                  <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
-                  <input type="text" name="title"
-                         class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-                <div class="mb-4">
-                  <label for="sub_title" class="block text-sm font-medium leading-6 text-gray-900">Sub Title</label>
-                  <input type="text" name="sub_title"
-                         class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-                <div class="mb-4 flex gap-4">
-                  <div class="grow">
-                    <label for="category" class="block text-sm font-medium leading-6 text-gray-900">Category</label>
-                    <select name="category"
-                            class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                      <option value="">เลือก</option>
-                      <option value="0">ทรงผม</option>
-                      <option value="1">สไตล์ผม</option>
-                      <option value="2">สีผม</option>
-                      <option value="3">การดูแลผม</option>
-                      <option value="4">ผลิตภัณฑ์ดูแลผม</option>
-                      <option value="5">ร้าน</option>
-                    </select>
-                  </div>
-                  <div class="grow">
-                    <label for="sub_category" class="block text-sm font-medium leading-6 text-gray-900">Sub-category</label>
-                    <select name="sub_category"
-                            class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                      <option value="">เลือก</option>
-                      <option value="0">ประเภทผม</option>
-                      <option value="1">รูปหน้า</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="mb-4"></div>
-                <div class="mb-4">
-                  <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
-                  <textarea rows="6" name="description" type="text"
-                            class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-                </div>
-                <div class="mb-4">
-                  <label for="images" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
-                  <input type="file" name="images[]" accept="image/*" multiple>
-                </div>
-                <div>
-                  {{--                  <button type="submit">Submit</button>--}}
-                  <button type="submit"
-                          class="rounded-md w-full bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Save
-                  </button>
-                </div>
-              </form>
-            </div>
+              @empty
+                <tr>
+                  <td colspan="3" class="text-center py-4 bg-gray-100">
+                    No Hair Style
+                  </td>
+                </tr>
+              @endforelse
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

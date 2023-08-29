@@ -27,8 +27,8 @@
           <img src="/shop_image/{{$shop->shop_image}}"/>
         </div>
         <div class="d-flex gap-2 mt-4">
-          <span class="capsule"> <a href="/salon-detail.html">ภาพรวม</a> </span>
-          <span class="capsule"><a href="/salon-review.html">รีวิว</a> </span>
+          <span class="capsule"> <a href="{{ url('/shop/') }}">ภาพรวม</a> </span>
+          <span class="capsule"><a href="{{ url('/shop/'.$shop->id.'/review') }}">รีวิว</a> </span>
         </div>
       </div>
       <div class="col-8 d-flex align-items-center px-4">
@@ -39,18 +39,28 @@
         </div>
       </div>
     </section>
+    @foreach($reviews as $review)
     <section>
       <div class="mb-4">
         <div class="d-flex gap-3 mb-2">
-          <img src="/images/png/salon/profile1.png"/>
-          <span>Somchai</span>
+          @if($review->user->profile !== null)
+            <div class="avatar">
+              <img src="/profile_image/{{$review->user->profile}}"/>
+            </div>
+          @else
+            <div class="avatar">
+             <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/b5/b5792903c17cade8baf8ecfa533142806169cc52_full.jpg"/>
+            </div>
+          @endif
+          <span>{{$review->user->name}}</span>
         </div>
-        <div class="px-5">บริการดีมาก ๆ ประทับใจสุด</div>
+        <div class="px-5">{{ $review->review_text }}</div>
       </div>
     </section>
+    @endforeach
     <hr>
     @guest()
-      <div class="d-flex gap-4">
+      <div class="d-flex gap-4 pb-4">
         <a href="{{ route('login') }}">
           <button class="btn btn-success">
             ล็อกอิน
@@ -76,15 +86,15 @@
       </section>
       <hr>
       <!-- Authentication -->
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end mb-4">
         <form method="POST" action="{{ route('logout') }}">
           @csrf
 
-          <x-dropdown-link :href="route('logout')"
-                           onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-            {{ __('Log Out') }}
-          </x-dropdown-link>
+{{--          <x-dropdown-link :href="route('logout')"--}}
+{{--                           onclick="event.preventDefault();--}}
+{{--                                                this.closest('form').submit();">--}}
+            <button class="btn btn-outline-danger">  {{ __('Log Out') }} </button>
+{{--          </x-dropdown-link>--}}
         </form>
       </div>
     @endauth

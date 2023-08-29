@@ -42,7 +42,7 @@
         <div class="mt-4">
           <x-input-label for="profile" :value="__('Profile')" />
 {{--          <input type="file" name="profile" accept="image/*">--}}
-          <x-text-input id="profile" class="block mt-1 w-full" type="file" name="profile" accept="image/*" :value="old('proflie')" autofocus autocomplete="profile" />
+          <x-text-input id="profile" class="block mt-1 w-full" type="file" name="profile" accept="image/*" :value="old('profile')" autofocus autocomplete="profile" />
           <x-input-error :messages="$errors->get('profile')" class="mt-2" />
         </div>
 

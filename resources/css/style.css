@@ -4,7 +4,7 @@
   --gray-color: #d9d9d9;
 }
 
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -70,8 +70,9 @@ nav.menu-bar > ul > li {
 }
 
 .title,
-.content {
+.content > pre {
   color: black;
+  font-family: 'Irish Grover', 'Prompt', sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
