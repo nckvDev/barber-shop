@@ -56,6 +56,7 @@
                   <label for="images" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
                   <input type="file" name="images[]" accept="image/*" multiple>
                 </div>
+                <div id="example"></div>
                 <div>
                   {{--                  <button type="submit">Submit</button>--}}
                   <button type="submit"
@@ -73,8 +74,14 @@
                     showConfirmButton: false,
                     timer: 1500
                   })
+
                 </script>
               @endif
+
+              <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+              <script>
+                var editor = new FroalaEditor('#example');
+              </script>
             </div>
         </div>
       </div>

@@ -14,31 +14,37 @@
     href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
-{{--  <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />--}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
+  {{--  <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />--}}
+
+  <!-- Froala Editor -->
+  <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
 
   <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/menu.js'])
+  @vite(['resources/css/app.css', 'resources/js/menu.js'])
   <script src="{{ asset('js/menu.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="font-sans antialiased">
-<div class="min-h-screen bg-gray-100">
+<div class="min-h-screen bg-gray-100 flex">
   @include('layouts.navigation')
 
-  <!-- Page Heading -->
-  @if (isset($header))
-    <header class="bg-white shadow">
-      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        {{ $header }}
-      </div>
-    </header>
-  @endif
+  <div class="w-full">
+    <!-- Page Heading -->
+    @if (isset($header))
+      <header class="bg-white">
+        <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          {{ $header }}
+        </div>
+      </header>
+    @endif
 
-  <!-- Page Content -->
-  <main>
-    {{ $slot }}
-  </main>
+    <!-- Page Content -->
+    <main class="h-[calc(100vh-73px)] overflow-y-auto">
+      {{ $slot }}
+    </main>
+  </div>
 </div>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
 </body>
 </html>
