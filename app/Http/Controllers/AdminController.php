@@ -26,7 +26,45 @@ class AdminController extends Controller
     return view('admin.HairManage.add');
   }
 
-  public function store(Request $request) {
+  public function imageUpload(Request $request)
+  {
+    try {
+      // File upload logic
+      $allowedExts = array("gif", "jpeg", "jpg", "png");
+
+      $temp = explode(".", $_FILES["file"]["name"]);
+
+      $extension = end($temp);
+
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
+      $mime = finfo_file($finfo, $_FILES["file"]["tmp_name"]);
+
+      if ((($mime == "image/gif")
+          || ($mime == "image/jpeg")
+          || ($mime == "image/pjpeg")
+          || ($mime == "image/x-png")
+          || ($mime == "image/png"))
+        && in_array($extension, $allowedExts)) {
+        // Generate new random name.
+        $name = sha1(microtime()) . "." . $extension;
+
+        move_uploaded_file($_FILES["file"]["tmp_name"], getcwd() . "/images/" . $name);
+
+        $response = new \StdClass();
+        $response->link = "/images/" . $name;
+        echo stripslashes(json_encode($response));
+      }
+    } catch (Exception $e) {
+      // Log the exception and handle it appropriately
+      Log::error($e->getMessage());
+      return response()->json(['error' => 'An error occurred during file upload'], 500);
+    }
+
+//    }
+  }
+
+  public function store(Request $request)
+  {
 
     $data = $request->validate([
       'title' => 'required',
@@ -40,7 +78,7 @@ class AdminController extends Controller
 
     if ($request->has('images')) {
       foreach ($request->file('images') as $image) {
-        $imageName = $data['title'].'-image-'.time().rand(1,1000).'.'.$image->extension();
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
         $image->move(public_path('hair_image'), $imageName);
 
         Image::create([
@@ -53,7 +91,8 @@ class AdminController extends Controller
     return redirect()->route('admin.hair-manage')->with('success', 'Add');
   }
 
-  public function view($id) {
+  public function view($id)
+  {
     $hairs = Hair::all();
     $shops = Shop::all();
 
@@ -61,7 +100,7 @@ class AdminController extends Controller
     if (!$hair) abort(404);
     $images = $hair->images;
 
-    return view('view', compact('hairs', 'shops','hair', 'images'));
+    return view('view', compact('hairs', 'shops', 'hair', 'images'));
   }
 
   public function edit($id)
@@ -118,7 +157,8 @@ class AdminController extends Controller
     return redirect()->back()->with('success', 'Delete');
   }
 
-  public function Shop() {
+  public function Shop()
+  {
     $shops = Shop::all();
     return view('admin.ShopManage.index', compact('shops'));
   }
@@ -128,8 +168,9 @@ class AdminController extends Controller
     return view('admin.ShopManage.add');
   }
 
-  public function storeShop(Request $request) {
-     $request->validate([
+  public function storeShop(Request $request)
+  {
+    $request->validate([
       'shop_name' => 'required',
       'status' => 'required',
       'phone_number' => 'required',
@@ -141,8 +182,8 @@ class AdminController extends Controller
     $shopImage = $request->file('shop_image');
     $mapImage = $request->file('map_image');
 
-    $imgShopName = 'shop'.'-image-'.time().rand(1,1000).'.'.$shopImage->extension();
-    $imgMapName = 'map'.'-image-'.time().rand(1,1000).'.'.$mapImage->extension();
+    $imgShopName = 'shop' . '-image-' . time() . rand(1, 1000) . '.' . $shopImage->extension();
+    $imgMapName = 'map' . '-image-' . time() . rand(1, 1000) . '.' . $mapImage->extension();
 
     $shopImage->move(public_path('shop_image'), $imgShopName);
     $mapImage->move(public_path('shop_image'), $imgMapName);
@@ -165,7 +206,8 @@ class AdminController extends Controller
     return view('admin.ShopManage.edit', compact('shop'));
   }
 
-  public function updateShop(Request $request, $id) {
+  public function updateShop(Request $request, $id)
+  {
     $request->validate([
       'shop_name' => 'required',
       'status' => 'required',
@@ -183,7 +225,7 @@ class AdminController extends Controller
       }
 
       $shopImage = $request->file('shop_image');
-      $imgShopName = 'shop'.'-image-'.time().rand(1,1000).'.'.$shopImage->extension();
+      $imgShopName = 'shop' . '-image-' . time() . rand(1, 1000) . '.' . $shopImage->extension();
       $shopImage->move(public_path('shop_image'), $imgShopName);
 //      $shopImage->storeAs('public/shop_image', $imgShopName);
       $shop->shop_image = $imgShopName;
@@ -197,7 +239,7 @@ class AdminController extends Controller
       }
 
       $mapImage = $request->file('map_image');
-      $imgMapName = 'map'.'-image-'.time().rand(1,1000).'.'.$mapImage->extension();
+      $imgMapName = 'map' . '-image-' . time() . rand(1, 1000) . '.' . $mapImage->extension();
       $mapImage->move(public_path('shop_image'), $imgMapName);
 //      $mapImage->storeAs('public/shop_image', $imgMapName);
       $shop->map_image = $imgMapName;
@@ -212,7 +254,8 @@ class AdminController extends Controller
     return redirect()->route('admin.shop-manage')->with('success', 'Update');
   }
 
-  public function deleteShop($id) {
+  public function deleteShop($id)
+  {
     $shop = Shop::findOrFail($id);
 
     // Delete shop image if it exists

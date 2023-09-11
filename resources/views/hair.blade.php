@@ -13,6 +13,7 @@
 
   <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
 
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_style.min.css" rel="stylesheet" type="text/css" />
   <!-- Scripts -->
   {{--  @vite(['resources/css/style.css', 'resources/js/menu.js'])--}}
   <script src="{{ asset('js/menu.js') }}"></script>
@@ -40,9 +41,11 @@
       {{--      <img src="/images/png/short-hair/short4.png" />--}}
     </div>
     <div class="mt-2 content">
-      <pre class="mt-4 mb-0">
-        {{$hair->description}}
-      </pre>
+      <div class="mt-4 mb-0 ">
+        <div class="fr-view">
+          {!! $hair->description !!}
+        </div>
+      </div>
     </div>
   </div>
 </div>
