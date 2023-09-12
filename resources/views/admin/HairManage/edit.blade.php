@@ -52,14 +52,6 @@
                   </select>
                 </div>
               </div>
-              <div class="mb-4"></div>
-              <div class="mb-4">
-                <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
-                <textarea rows="6" name="description" type="text"
-                          class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                  {{$hair->description}}
-                </textarea>
-              </div>
               <div class="mb-4">
                 <label for="images" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
                 <input type="file" name="images[]" accept="image/*" multiple>
@@ -69,6 +61,14 @@
                          style="width: 143px;height: 180px;object-fit: cover;overflow: hidden;">
                   @endforeach
                 </div>
+              </div>
+              <div class="mb-4"></div>
+              <div class="mb-4">
+                <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                <textarea rows="6" name="description" type="text" id="description"
+                          class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  {{$hair->description}}
+                </textarea>
               </div>
               <div>
                 {{--                  <button type="submit">Submit</button>--}}
@@ -89,6 +89,21 @@
                 })
               </script>
             @endif
+
+            <script type='text/javascript'
+                    src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+            <script>
+              new FroalaEditor('#description', {
+                // imageUploadParam: 'image_param',
+                imageUploadMethod: 'POST',
+                height: 400,
+                imageUploadURL: "{{ route('imageUpload') }}",
+                imageUploadParams: {
+                  froala: 'true',
+                  _token: "{{ csrf_token() }}"
+                }
+              });
+            </script>
           </div>
         </div>
       </div>

@@ -28,148 +28,150 @@
 
 </head>
 <body>
-<header class="header">
-  <div class="box-brand">
-    <h1>
-      <a href="{{ url('/') }}">
-        ไอเดียทรงผม
-      </a>
-    </h1>
-  </div>
-  <div class="search">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-      <path
-        fill="currentColor"
-        d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128c0-70.7 57.2-128 128-128c70.7 0 128 57.2 128 128c0 70.7-57.2 128-128 128z"
-      />
-    </svg>
-  </div>
-</header>
+<div class="d-flex justify-content-between position-sticky top-0 z-3 bg-white py-2">
+  <header class="header container-xl w-25">
+    <div class="box-brand">
+      <h1>
+        <a href="{{ url('/') }}">
+          ไอเดียทรงผม
+        </a>
+      </h1>
+    </div>
+{{--    <div class="search">--}}
+{{--      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">--}}
+{{--        <path--}}
+{{--          fill="currentColor"--}}
+{{--          d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128c0-70.7 57.2-128 128-128c70.7 0 128 57.2 128 128c0 70.7-57.2 128-128 128z"--}}
+{{--        />--}}
+{{--      </svg>--}}
+{{--    </div>--}}
+  </header>
+  <nav class="menu-bar container-xl w-75">
+    <ul>
+      <li class="dropdown">
+        <button onclick="myFunction(1)" class="dropbtnOne">ทรงผม</button>
+        <div id="myDropdownOne" class="dropdown-content-one">
+          <div>
+            <h5>ประเภทผม</h5>
+            @foreach($items as $item)
+              @if($item->category === 0 && $item->sub_category === 0)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+          <div>
+            <h5>รูปหน้า</h5>
+            @foreach($items as $item)
+              @if($item->category === 0 && $item->sub_category === 1)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+        </div>
+      </li>
+      <li class="dropdown">
+        <button onclick="myFunction(2)" class="dropbtnTwo">สไตล์ผม</button>
+        <div id="myDropdownTwo" class="dropdown-content-two">
+          <div>
+            <h5>สไตล์</h5>
+            @foreach($items as $item)
+              @if($item->category === 1 && $item->sub_category === 0)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+          <div>
+            <h5>รูปหน้า</h5>
+            @foreach($items as $item)
+              @if($item->category === 1 && $item->sub_category === 1)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+        </div>
+      </li>
+      <li class="dropdown">
+        <button onclick="myFunction(3)" class="dropbtnThree">สีผม</button>
+        <div id="myDropdownThree" class="dropdown-content-three">
+          <div>
+            <h5>สีผม</h5>
+            @foreach($items as $item)
+              @if($item->category === 2 && $item->sub_category === 0)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+          <div>
+            <h5>เทรนด์สีผม</h5>
+            @foreach($items as $item)
+              @if($item->category === 2 && $item->sub_category === 1)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+        </div>
+      </li>
+      <li class="dropdown">
+        <button onclick="myFunction(4)" class="dropbtnFour">การดูแลผม</button>
+        <div id="myDropdownFour" class="dropdown-content-four">
+          <div>
+            <h5>เคล็ดลับดูแลผม</h5>
+            @foreach($items as $item)
+              @if($item->category === 3 && $item->sub_category === 0)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+          <div>
+            <h5>การดูแลทั่วไป</h5>
+            @foreach($items as $item)
+              @if($item->category === 3 && $item->sub_category === 1)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+        </div>
+      </li>
+      <li class="dropdown">
+        <button onclick="myFunction(5)" class="dropbtnFive">ผลิตภัณฑ์ดูแลผม</button>
+        <div id="myDropdownFive" class="dropdown-content-five">
+          <div>
+            <h5>ประเภทของผลิตภัณฑ์</h5>
+            @foreach($items as $item)
+              @if($item->category === 4 && $item->sub_category === 0)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+          <div>
+            <h5>แบรนด์</h5>
+            @foreach($items as $item)
+              @if($item->category === 4 && $item->sub_category === 1)
+                <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
+              @endif
+            @endforeach
+          </div>
+        </div>
+      </li>
+      <li class="dropdown">
+        <button onclick="myFunction(6)" class="dropbtnSix">ร้าน</button>
+        <div id="myDropdownSix" class="dropdown-content-six">
+          <div>
+            <a href="{{url('/shop')}}" class="">
+              <h5>
+                ชื่อร้าน
+              </h5>
+            </a>
+            @foreach($shops as $shop)
+              <a href="{{url('/shop/'.$shop->id)}}">{{ $shop->shop_name }}</a>
+            @endforeach
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>
 
-<nav class="menu-bar">
-  <ul>
-    <li class="dropdown">
-      <button onclick="myFunction(1)" class="dropbtnOne">ทรงผม</button>
-      <div id="myDropdownOne" class="dropdown-content-one">
-        <div>
-          <h5>ประเภทผม</h5>
-          @foreach($items as $item)
-            @if($item->category === 0 && $item->sub_category === 0)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-        <div>
-          <h5>รูปหน้า</h5>
-          @foreach($items as $item)
-            @if($item->category === 0 && $item->sub_category === 1)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-      </div>
-    </li>
-    <li class="dropdown">
-      <button onclick="myFunction(2)" class="dropbtnTwo">สไตล์ผม</button>
-      <div id="myDropdownTwo" class="dropdown-content-two">
-        <div>
-          <h5>สไตล์</h5>
-          @foreach($items as $item)
-            @if($item->category === 1 && $item->sub_category === 0)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-        <div>
-          <h5>รูปหน้า</h5>
-          @foreach($items as $item)
-            @if($item->category === 1 && $item->sub_category === 1)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-      </div>
-    </li>
-    <li class="dropdown">
-      <button onclick="myFunction(3)" class="dropbtnThree">สีผม</button>
-      <div id="myDropdownThree" class="dropdown-content-three">
-        <div>
-          <h5>สีผม</h5>
-          @foreach($items as $item)
-            @if($item->category === 2 && $item->sub_category === 0)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-        <div>
-          <h5>เทรนด์สีผม</h5>
-          @foreach($items as $item)
-            @if($item->category === 2 && $item->sub_category === 1)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-      </div>
-    </li>
-    <li class="dropdown">
-      <button onclick="myFunction(4)" class="dropbtnFour">การดูแลผม</button>
-      <div id="myDropdownFour" class="dropdown-content-four">
-        <div>
-          <h5>เคล็ดลับดูแลผม</h5>
-          @foreach($items as $item)
-            @if($item->category === 3 && $item->sub_category === 0)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-        <div>
-          <h5>การดูแลทั่วไป</h5>
-          @foreach($items as $item)
-            @if($item->category === 3 && $item->sub_category === 1)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-      </div>
-    </li>
-    <li class="dropdown">
-      <button onclick="myFunction(5)" class="dropbtnFive">ผลิตภัณฑ์ดูแลผม</button>
-      <div id="myDropdownFive" class="dropdown-content-five">
-        <div>
-          <h5>ประเภทของผลิตภัณฑ์</h5>
-          @foreach($items as $item)
-            @if($item->category === 4 && $item->sub_category === 0)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-        <div>
-          <h5>แบรนด์</h5>
-          @foreach($items as $item)
-            @if($item->category === 4 && $item->sub_category === 1)
-              <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
-            @endif
-          @endforeach
-        </div>
-      </div>
-    </li>
-    <li class="dropdown">
-      <button onclick="myFunction(6)" class="dropbtnSix">ร้าน</button>
-      <div id="myDropdownSix" class="dropdown-content-six">
-        <div>
-          <a href="{{url('/shop')}}" class="">
-            <h5>
-              ชื่อร้าน
-            </h5>
-          </a>
-          @foreach($shops as $shop)
-            <a href="{{url('/shop/'.$shop->id)}}">{{ $shop->shop_name }}</a>
-          @endforeach
-        </div>
-      </div>
-    </li>
-  </ul>
-</nav>
 <script>
   // const listMenu = ['ทรงผม', 'สไตล์ผม', 'สีผม', 'การดูแลผม', 'ผลิตภัณฑ์ดูแลผม', 'ร้าน']
   const colors = ['#ADACDF', '#DFACC8', '#ACDFCA', '#DFD4AC', '#DFACAC', '#C6ACDF']

@@ -10,7 +10,7 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">
           <div>
-            <form action="{{ route('addHair') }}" method="POST" id="submitform" enctype="multipart/form-data">
+            <form action="{{ route('addHair') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="mb-4">
                 <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
@@ -83,7 +83,7 @@
                     src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
             <script>
               new FroalaEditor('#description', {
-                imageUploadParam: 'image_param',
+                // imageUploadParam: 'image_param',
                 imageUploadMethod: 'POST',
                 height: 200,
                 imageUploadURL: "{{ route('imageUpload') }}",
@@ -92,24 +92,6 @@
                   _token: "{{ csrf_token() }}"
                 }
               });
-
-              // $(Document).ready(function () {
-              //   $('body').on('submit', '#submitform', function(e) {
-              //     e.preventDefault()
-              //
-              //     $.ajax({
-              //       url: $(this).attr('action'),
-              //       data: new FormData(this),
-              //       type: 'POST',
-              //       contentType: false,
-              //       cache: false,
-              //       processData: false,
-              //       success: function (data) {
-              //         alert(data.msg)
-              //       }
-              //     })
-              //   })
-              // })
             </script>
           </div>
         </div>

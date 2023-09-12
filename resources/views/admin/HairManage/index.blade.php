@@ -52,12 +52,12 @@
                     </div>
                   </td>
                   <td class="px-6 py-4">
-                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000 ">
+                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000 w-40">
                       {{ $hair->sub_title }}
                     </div>
                   </td>
-                  <td class="px-6 py-4">
-                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000">
+                  <td class="px-6 py-4 ">
+                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000 w-72">
                       {{ $hair->description }}
                     </div>
                   </td>

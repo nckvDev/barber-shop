@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
 
   <!-- Scripts -->
   {{--  @vite(['resources/css/style.css', 'resources/js/menu.js'])--}}
@@ -32,96 +32,82 @@
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
     crossorigin="anonymous"
   />
+  <!-- Swiper -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+  />
 
 </head>
 <body>
-<div class="contain">
-{{--  <div id="header"></div>--}}
-{{--  @include('components.header')--}}
+<div class="vh-100">
+  {{--  <div id="header"></div>--}}
+  {{--  @include('components.header')--}}
   <x-header :items="$hairs" :shops="$shops"/>
-  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="d-flex">
-          <div class="position-relative box-image">
-            <img src="/images/png/hair1.png" alt="hair"/>
-            <img src="/images/png/hair3.png" alt="hair"/>
-            <img src="/images/png/hair2.png" alt="hair"/>
-          </div>
-          <div class="d-flex align-items-center justify-content-start">
-            <div class="position-relative" style="width: 260px">
-              <p class="m-0 text-center">ไอเดีย ไฮไลต์สีผม สำหรับสาวผมสั้น</p>
-              <img
-                src="/images/svg/line-1.svg"
-                alt="line"
-                class="w-100 position-absolute"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="d-flex" style="gap: 39px">
-          <div class="position-relative box-image-two">
-            <img src="/images/png/hair4.png" alt="hair" class="position-absolute"/>
-            <img src="/images/png/hair5.png" alt="hair" class="position-absolute"/>
-          </div>
-          <div class="d-flex align-items-center justify-content-start flex-grow-1">
-            <div>
-              <p class="m-0 text-center" style="width: 200px">
-                เคล็ดลับบำรุงสำหรับผู้หญิงและผู้ชายให้ยาวเร็วกว่าที่เคย
-              </p>
-              <div class="position-relative box-line">
-                <img
-                  src="/images/svg/line-2.svg"
-                  alt="line"
-                  class="position-absolute"
-                />
-                <img
-                  src="/images/svg/line-3.svg"
-                  alt="line"
-                  class="position-absolute"
-                />
+  <div >
+    <div class="swiper">
+      <!-- Slider main container -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        @foreach($hairTop as $hair)
+          <div class="swiper-slide">
+            @foreach($hair->getOneImage as $image)
+              <div class="image-wrapper">
+                <img src="/hair_image/{{$image->image}}" alt="{{$hair->sub_title}}" class="w-100 h-100 object-fit-cover">
               </div>
+            @endforeach
+            <div class="text-wrapper text-md-center p-7 pt-lg-0 mt-lg-8 mx-auto">
+              <h2 class="title font-italic m-0 mb-7">
+                <a href="/hair/{{$hair->id}}">
+                  {{ $hair->title }}
+                </a>
+              </h2>
+              <p class="font-weight-light mb-4">
+                {{ $hair->sub_title }}
+              </p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="d-flex px-2">
-          <div class="position-relative box-image-three">
-            <img src="/images/png/hair6.png" alt="hair" class="position-absolute"/>
-          </div>
-          <div class="d-flex align-items-center justify-content-start">
-            <div>
-              <p class="m-0 text-center px-5">ผลิตภัณฑ์บำรุงเส้นผม</p>
-              <img src="/images/svg/line-4.svg" alt="line" class="position-absolute"/>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
-    <button
-      class="carousel-control-prev justify-content-start"
-      type="button"
-      data-bs-target="#carouselExampleDark"
-      data-bs-slide="prev"
-    >
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button
-      class="carousel-control-next justify-content-end"
-      type="button"
-      data-bs-target="#carouselExampleDark"
-      data-bs-slide="next"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+
+    {{--  hero-buttons --}}
+    <div class="hero-buttons d-flex align-items-center justify-content-center mx-auto px-7">
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev hero-prev d-flex align-items-center swiper-button-disabled"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
+    </div>
   </div>
 </div>
+<script type="module">
+  import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs'
 
+  const swiper = new Swiper('.swiper', {
+    speed: 400,
+    spaceBetween: 100,
+    // Optional parameters
+    loop: true,
+    // autoplay: true,
+    // effect: 'cards',
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    }
+
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

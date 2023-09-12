@@ -20,6 +20,13 @@
   <!-- Froala Editor -->
   <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
 
+  <!-- Swiper -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+  />
+
+
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/menu.js'])
   <script src="{{ asset('js/menu.js') }}"></script>
@@ -46,5 +53,6 @@
   </div>
 </div>
 <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </body>
 </html>
