@@ -78,9 +78,9 @@
                 <td class=" px-6 py-4">
                   <div class="w-max">
                     <a href="{{ url('/admin/shop-edit/'.$shop->id) }}"
-                       class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">edit</a>
+                       class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">แก้ไข</a>
                     <a href="{{ url('/admin/shop-delete/'.$shop->id) }}"
-                       class="text-red-500 font-semibold border border-red-500 rounded-md px-2 py-1 hover:bg-red-500 hover:text-white transition">delete</a>
+                       class="text-white font-semibold bg-red-600 rounded-md px-2 py-1 border hover:bg-red-900 transition">ลบ</a>
                   </div>
                 </td>
 

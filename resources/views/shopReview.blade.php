@@ -80,10 +80,10 @@
     <section>
       <form method="POST" action="{{ route('addReview', $shop->id) }}">
         @csrf
-        <h4>Comment</h4>
+        <h4>เขียนความคิดเห็น</h4>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="review_text"></textarea>
         <x-input-error :messages="$errors->get('review_text')" class="my-2"/>
-        <button type="submit" class="btn btn-success mt-4">Review</button>
+        <button type="submit" class="btn btn-success mt-4">บันทึก</button>
       </form>
     </section>
     <hr>
@@ -95,7 +95,7 @@
         {{--          <x-dropdown-link :href="route('logout')"--}}
         {{--                           onclick="event.preventDefault();--}}
         {{--                                                this.closest('form').submit();">--}}
-        <button class="btn btn-outline-danger">  {{ __('Log Out') }} </button>
+        <button class="btn btn-outline-danger">  {{ __('ออกจากระบบ') }} </button>
         {{--          </x-dropdown-link>--}}
       </form>
     </div>

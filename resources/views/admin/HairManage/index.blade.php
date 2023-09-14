@@ -69,7 +69,7 @@
                       <a href="{{ url('/admin/hair-edit/'.$hair->id) }}"
                          class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">แก้ไข</a>
                       <a href="{{ url('/admin/hair-delete/'.$hair->id) }}"
-                         class="text-white  font-semibold bg-red-600 rounded-md px-2 py-1 border  hover:bg-red-900 transition">ลบ</a>
+                         class="text-white font-semibold bg-red-600 rounded-md px-2 py-1 border hover:bg-red-900 transition">ลบ</a>
                     </div>
                   </td>
                 </tr>
