@@ -26,15 +26,13 @@
 </head>
 <body>
 <x-header :items="$hairs" :shops="$shops"/>
-<div class="containers containers-sm pb-10 h-100">
+<div class="containers containers-sm pb-10 h-100 my-4">
   {{--  @include('components.header')--}}
-  <div class="px-3 pb-3">
-    <div style="text-align: center;">
+  <div class="border-bottom border-dark-subtle mb-4">
       <h1 class="title title-spacing">{{$hair->title}}</h1>
       <p class="sub-title mb-6 mb-md-10">
         {{$hair->sub_title}}
       </p>
-    </div>
   </div>
   <section class="_gallery">
     <div

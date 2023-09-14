@@ -28,7 +28,7 @@
 
 </head>
 <body>
-<div class="d-flex justify-content-between position-sticky top-0 z-3 bg-white py-2">
+<div class="d-flex justify-content-between position-sticky top-0 header-bar bg-white py-2 shadow-sm">
   <header class="header container-xl w-25">
     <div class="box-brand">
       <h1>

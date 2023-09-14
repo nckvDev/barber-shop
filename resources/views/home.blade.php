@@ -42,11 +42,11 @@
 
 </head>
 <body>
-<div class="vh-100">
+<div>
   {{--  <div id="header"></div>--}}
   {{--  @include('components.header')--}}
   <x-header :items="$hairs" :shops="$shops"/>
-  <div >
+  <div class="mb-4">
     <div class="swiper">
       <!-- Slider main container -->
       <div class="swiper-wrapper">
@@ -55,7 +55,8 @@
           <div class="swiper-slide">
             @foreach($hair->getOneImage as $image)
               <div class="image-wrapper">
-                <img src="/hair_image/{{$image->image}}" alt="{{$hair->sub_title}}" class="w-100 h-100 object-fit-cover">
+                <img src="/hair_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                     class="w-100 h-100 object-fit-cover">
               </div>
             @endforeach
             <div class="text-wrapper text-md-center p-7 pt-lg-0 mt-lg-8 mx-auto">
@@ -84,6 +85,31 @@
 
       <!-- If we need scrollbar -->
       <div class="swiper-scrollbar"></div>
+    </div>
+  </div>
+  <div class="mb-4 container">
+    <h1 class="mb-4"><em>เทรนด์ทรงผม</em></h1>
+    <div>
+      <div class="row">
+        @foreach($hairTop as $hair)
+          <div class="col-4 mb-4">
+            <div class="p-3 card-gallery">
+              @foreach($hair->getOneImage as $image)
+                <div class="ratio ratio-16x9 mb-3">
+                  <img src="/hair_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                       class="w-100 h-100 object-fit-cover rounded-1">
+                </div>
+              @endforeach
+              <span>แกลลอรี่</span>
+              <p class="fs-4 mb-0">
+                <a href="/hair/{{$hair->id}}" class="text-decoration-none text-dark">
+                  {{ $hair->title }}
+                </a>
+              </p>
+            </div>
+          </div>
+        @endforeach
+      </div>
     </div>
   </div>
 </div>
