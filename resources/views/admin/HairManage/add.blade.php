@@ -36,7 +36,7 @@
                     <option value="2">สีผม</option>
                     <option value="3">การดูแลผม</option>
                     <option value="4">ผลิตภัณฑ์ดูแลผม</option>
-                    <option value="5">ร้าน</option>
+{{--                    <option value="5">ร้าน</option>--}}
                   </select>
                 </div>
                 <div class="grow">

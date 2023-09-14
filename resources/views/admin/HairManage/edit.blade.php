@@ -38,7 +38,7 @@
                     </option>
                     <option value="4" {{old('category', $hair->category ) == "4" ? 'selected' : null}}>ผลิตภัณฑ์ดูแลผม
                     </option>
-                    <option value="5" {{old('category', $hair->category ) == "5" ? 'selected' : null}}>ร้าน</option>
+{{--                    <option value="5" {{old('category', $hair->category ) == "5" ? 'selected' : null}}>ร้าน</option>--}}
                   </select>
                 </div>
                 <div class="grow">
