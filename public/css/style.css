@@ -91,11 +91,13 @@
   color: var(--font-color);
 }
 
-.header > .box-brand > h1:hover {
+.header > .box-brand > h1:hover a::before {
   cursor: pointer;
+  transform: translate(-1.1rem, -0.75ex);;
 }
 
 .header > .box-brand > h1 > a::before {
+  transition: all 0.5s ease-in-out;
   content: '';
   border-radius: 100%;
   position: absolute;
@@ -123,7 +125,7 @@ nav.menu-bar > ul {
   font-size: 18px;
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-left: 0;
   margin-bottom: 0;
 }
@@ -618,4 +620,15 @@ img, figure {
   height: auto;
 }
 
+.header-bar {
+  z-index: 20;
+}
 
+.card-gallery {
+  border-radius: 20px;
+  transition: all 0.5s ease;
+}
+
+.card-gallery:hover {
+  box-shadow: rgb(173, 172, 223) 0px 0px 0px 3px, rgb(223, 172, 200) 0px 0px 0px 6px, rgb(172, 223, 202) 0px 0px 0px 9px, rgb(223, 212, 172) 0px 0px 0px 12px, rgb(223, 172, 172) 0px 0px 0px 15px;
+}
