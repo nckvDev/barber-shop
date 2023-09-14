@@ -1,8 +1,11 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Shop Manage') }}
-    </h2>
+    <div class="flex justify-between">
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('จัดการร้าน') }}
+      </h2>
+      <div>{{ Auth::user()->name }}</div>
+    </div>
   </x-slot>
 
   <div class="py-12">
@@ -26,7 +29,7 @@
           <div class="mb-4">
             <a href="{{ route('add-Shop') }}"
                class="rounded-md  bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-              Add Shop
+              เพิ่มร้าน
             </a>
           </div>
           <table class="min-w-full text-left text-sm font-light">
@@ -36,9 +39,9 @@
               <th scope="col" class="px-6 py-4">ชื่อร้าน</th>
               <th scope="col" class="px-6 py-4">สถานะ</th>
               <th scope="col" class="px-6 py-4">เบอร์โทรศัพท์</th>
-              <th scope="col" class="px-6 py-4">เวลาเปิด</th>
+              <th scope="col" class="px-6 py-4">เวลาเปิด-ปิด</th>
               <th scope="col" class="px-6 py-4">ภาพร้าน</th>
-              <th scope="col" class="px-6 py-4">จัดการ</th>
+              <th scope="col" class="px-6 py-4"></th>
             </tr>
             </thead>
             <tbody>
@@ -75,9 +78,9 @@
                 <td class=" px-6 py-4">
                   <div class="w-max">
                     <a href="{{ url('/admin/shop-edit/'.$shop->id) }}"
-                       class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">edit</a>
+                       class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">แก้ไข</a>
                     <a href="{{ url('/admin/shop-delete/'.$shop->id) }}"
-                       class="text-red-500 font-semibold border border-red-500 rounded-md px-2 py-1 hover:bg-red-500 hover:text-white transition">delete</a>
+                       class="text-white font-semibold bg-red-600 rounded-md px-2 py-1 border hover:bg-red-900 transition">ลบ</a>
                   </div>
                 </td>
 

@@ -1,12 +1,15 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Hair Manage') }}
-    </h2>
+    <div class="flex justify-between">
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('จัดการสไตล์ผม') }}
+      </h2>
+      <div>{{ Auth::user()->name }}</div>
+    </div>
   </x-slot>
 
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+  <div class="py-12 overflow-x-auto">
+    <div class="mx-auto sm:px-6 lg:px-8 ">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">
           <div>
@@ -27,17 +30,17 @@
             <div class="mb-4">
               <a href="{{ route('add-Hair') }}"
                  class="rounded-md  bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-                Add Hair Style
+                เพิ่มสไตล์ผม
               </a>
             </div>
             <table class="min-w-full text-left text-sm font-light">
               <thead class="border-b font-medium dark:border-neutral-500">
               <tr>
-                <th scope="col" class="px-6 py-4">id</th>
-                <th scope="col" class="px-6 py-4">Title</th>
-                <th scope="col" class="px-6 py-4">Sub Title</th>
-                <th scope="col" class="px-6 py-4">Description</th>
-                <th scope="col" class="px-6 py-4">Manage</th>
+                <th scope="col" class="px-6 py-4">#</th>
+                <th scope="col" class="px-6 py-4">หัวเรื่อง</th>
+                <th scope="col" class="px-6 py-4">คำอธิบาย</th>
+                <th scope="col" class="px-6 py-4">เนื้อหา</th>
+                <th scope="col" class="px-6 py-4"></th>
               </tr>
               </thead>
               <tbody>
@@ -52,21 +55,21 @@
                     </div>
                   </td>
                   <td class="px-6 py-4">
-                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000 ">
+                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000 w-40">
                       {{ $hair->sub_title }}
                     </div>
                   </td>
-                  <td class="px-6 py-4">
-                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000">
+                  <td class="px-6 py-4 ">
+                    <div class="line-clamp-2 hover:line-clamp-none transition delay-1000 w-72">
                       {{ $hair->description }}
                     </div>
                   </td>
                   <td class=" px-6 py-4">
                     <div class="w-max">
                       <a href="{{ url('/admin/hair-edit/'.$hair->id) }}"
-                         class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">edit</a>
+                         class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">แก้ไข</a>
                       <a href="{{ url('/admin/hair-delete/'.$hair->id) }}"
-                         class="text-red-500 font-semibold border border-red-500 rounded-md px-2 py-1 hover:bg-red-500 hover:text-white transition">delete</a>
+                         class="text-white font-semibold bg-red-600 rounded-md px-2 py-1 border hover:bg-red-900 transition">ลบ</a>
                     </div>
                   </td>
                 </tr>

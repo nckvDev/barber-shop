@@ -11,8 +11,9 @@ class HairController extends Controller
 {
   public function home() {
     $hairs = Hair::all();
+    $hairTop = Hair::orderByDesc('created_at')->take(5)->get();
     $shops = Shop::all();
-    return view('home', compact('hairs', 'shops'));
+    return view('home', compact('hairs', 'hairTop', 'shops'));
   }
   public function hair($id)
   {
@@ -27,7 +28,7 @@ class HairController extends Controller
   }
 
   public function shop() {
-    $hairs = Hair::all();
+    $hairs = Hair::orderByDesc('created_at')->take(5)->get();
     $shops = Shop::all();
 
     return view('shop', compact('shops','hairs' ));
