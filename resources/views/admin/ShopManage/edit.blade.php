@@ -1,8 +1,11 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Edit Shop') }}
-    </h2>
+    <div>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('แก้ไขร้าน') }}
+      </h2>
+      <div>{{ Auth::user()->name }}</div>
+    </div>
   </x-slot>
 
   <div class="py-12">
@@ -28,7 +31,8 @@
               @csrf
               <div class="mb-4">
                 <label for="shop_name" class="block text-sm font-medium leading-6 text-gray-900">ชื่อร้าน</label>
-                <input type="text" name="shop_name" placeholder="ดรีมเวิลด์ ซาลอน" value="{{ old('shop_name', $shop->shop_name) }}"
+                <input type="text" name="shop_name" placeholder="ดรีมเวิลด์ ซาลอน"
+                       value="{{ old('shop_name', $shop->shop_name) }}"
                        class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
               <div class="mb-4 flex gap-4">
@@ -36,28 +40,33 @@
                   <label for="status" class="block text-sm font-medium leading-6 text-gray-900">สถานะเปิด-ปิด</label>
                   <select name="status"
                           class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <option value="active" {{old('status', $shop->status ) == "active" ? 'selected' : null}}>เปิดอยู่</option>
-                    <option value="inActive" {{old('status', $shop->status ) == "inActive" ? 'selected' : null}}>ปิดอยู่</option>
+                    <option value="active" {{old('status', $shop->status ) == "active" ? 'selected' : null}}>เปิดอยู่
+                    </option>
+                    <option value="inActive" {{old('status', $shop->status ) == "inActive" ? 'selected' : null}}>
+                      ปิดอยู่
+                    </option>
                   </select>
                 </div>
               </div>
               <div class="mb-4">
                 <label for="phone_number"
                        class="block text-sm font-medium leading-6 text-gray-900">เบอร์โทรศัพท์</label>
-                <input type="text" name="phone_number" placeholder="0999999999" value="{{ old('phone_number', $shop->phone_number)}}"
+                <input type="text" name="phone_number" placeholder="0999999999"
+                       value="{{ old('phone_number', $shop->phone_number)}}"
                        class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
               <div class="mb-4"></div>
               <div class="mb-4">
                 <label for="open_hours" class="block text-sm font-medium leading-6 text-gray-900">เวลาเปิดปิด</label>
-                <input name="open_hours" type="text" placeholder="08:30-19:30" value="{{ old('open_hours', $shop->open_hours) }}"
+                <input name="open_hours" type="text" placeholder="08:30-19:30"
+                       value="{{ old('open_hours', $shop->open_hours) }}"
                        class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
               </div>
               <div class="mb-4">
                 <label for="shop_image" class="block text-sm font-medium leading-6 text-gray-900">รูปภาพร้าน</label>
                 <input type="file" name="shop_image" accept="image/*">
                 <div class="flex gap-4 mt-4">
-                    <img src="/shop_image/{{$shop->shop_image}}" alt="image shop" class="w-52">
+                  <img src="/shop_image/{{$shop->shop_image}}" alt="image shop" class="w-52">
                 </div>
               </div>
               <div class="mb-4">

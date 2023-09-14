@@ -1,8 +1,11 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Edit Hair') }}
-    </h2>
+    <div class="flex justify-between">
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('แก้ไขสไตล์ผม') }}
+      </h2>
+      <div>{{ Auth::user()->name }}</div>
+    </div>
   </x-slot>
 
   <div class="py-12">
@@ -10,7 +13,7 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">
           <div>
-            <form  action="{{ url('/admin/hair-update/'.$hair->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/hair-update/'.$hair->id) }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="mb-4">
                 <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
@@ -53,12 +56,18 @@
                 </div>
               </div>
               <div class="mb-4">
-                <label for="images" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
+                <label for="images" class="block text-sm font-medium leading-6 text-gray-900">อัพรูปภาพ</label>
                 <input type="file" name="images[]" accept="image/*" multiple>
                 <div class="flex gap-4 mt-4">
                   @foreach($hair->images as $image)
-                    <img src="/hair_image/{{$image->image}}" alt="image"
-                         style="width: 143px;height: 180px;object-fit: cover;overflow: hidden;">
+                    <div>
+
+                      <img src="/hair_image/{{$image->image}}" alt="image"
+                           style="width: 143px;height: 180px;object-fit: cover;overflow: hidden;">
+                      <div class="bg-red-200 px-3 py-2 rounded-md text-center mt-3">
+                        <a href="/admin/image-remove/{{$image->id}}">ลบภาพ</a>
+                      </div>
+                    </div>
                   @endforeach
                 </div>
               </div>

@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="w-max mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-screen flex-col py-4">
+    <div class="w-max mx-auto px-4  sm:px-6 lg:px-8">
+        <div class="flex justify-between h-screen flex-col pb-4 pt-6">
             <div class="flex">
                 <!-- Logo -->
 {{--                <div class="shrink-0 flex items-center">--}}
@@ -13,10 +13,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden sm:flex sm:flex-col sm:justify-center sm:items-center gap-4 w-full">
                   <x-nav-link :href="route('admin.hair-manage')" :active="request()->routeIs('admin.hair-manage')" >
-                    {{ __('Hair') }}
+                    {{ __('สไตล์ผม') }}
                   </x-nav-link>
                   <x-nav-link :href="route('admin.shop-manage')" :active="request()->routeIs('admin.shop-manage')">
-                    {{ __('Shop') }}
+                    {{ __('ร้าน') }}
                   </x-nav-link>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                       <div class="flex flex-col">
 
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+{{--                            <div>{{ Auth::user()->name }}</div>--}}
 
 {{--                            <div class="ml-1">--}}
 {{--                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">--}}
@@ -43,7 +43,7 @@
                         <x-dropdown-link :href="route('logout')"
                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                          {{ __('Log Out') }}
+                          {{ __('ออกจากระบบ') }}
                         </x-dropdown-link>
                       </form>
                       </div>

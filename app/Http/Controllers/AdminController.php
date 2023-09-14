@@ -29,7 +29,6 @@ class AdminController extends Controller
   public function imageUpload(Request $request)
   {
     try {
-      // File upload logic
       $allowedExts = array("gif", "jpeg", "jpg", "png");
 
       $temp = explode(".", $_FILES["file"]["name"]);
@@ -55,13 +54,20 @@ class AdminController extends Controller
         echo stripslashes(json_encode($response));
       }
     } catch (Exception $e) {
-      // Log the exception and handle it appropriately
       Log::error($e->getMessage());
       return response()->json(['error' => 'An error occurred during file upload'], 500);
     }
-
-//    }
   }
+
+  public function imageRemove($id)
+  {
+    $image = Image::find($id);
+    if(!$image) abort(404);
+    unlink(public_path(('hair_image/'.$image->image)));
+    $image->delete();
+    return back()->with('success', 'Image deleted!');
+  }
+
 
   public function store(Request $request)
   {
@@ -121,26 +127,20 @@ class AdminController extends Controller
 
     $hairStyle = Hair::findOrFail($id);
 
-    // Update the model attributes
+    if (!$hairStyle) abort(404);
+
     $hairStyle->update($data);
 
-    // Handle image updates
     if ($request->has('images')) {
-      $newImages = [];
-
       foreach ($request->file('images') as $image) {
         $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
         $image->move(public_path('hair_image'), $imageName);
 
-        $newImages[] = [
+        Image::create([
           'hair_id' => $hairStyle->id,
           'image' => $imageName
-        ];
+        ]);
       }
-
-      Image::where('hair_id', $hairStyle->id)->delete();
-
-      Image::create($newImages);
     }
 
     return redirect()->route('admin.hair-manage')->with('success', 'Update');
