@@ -64,7 +64,7 @@
                       <img src="/hair_products_image/{{$image->image}}" alt="image"
                            style="width: 143px;height: 180px;object-fit: cover;overflow: hidden;">
                       <div class="bg-red-200 px-3 py-2 rounded-md text-center mt-3">
-                        <a href="/admin/image-remove/{{$image->id}}">ลบภาพ</a>
+                        <a href="/admin/image-products-remove/{{$image->id}}">ลบภาพ</a>
                       </div>
                     </div>
                   @endforeach

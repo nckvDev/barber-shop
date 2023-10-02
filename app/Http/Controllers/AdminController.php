@@ -46,6 +46,11 @@ class AdminController extends Controller
     $hairs = DB::table('hairs')->where('category', 4)->get();
     return view('admin.HairProductsManage.index', compact('hairs'));
   }
+  public function HairVideo()
+  {
+    $hairs = DB::table('hairs')->where('category', 5)->get();
+    return view('admin.HairVideoManage.index', compact('hairs'));
+  }
 
 
   public function add()
@@ -71,6 +76,10 @@ class AdminController extends Controller
   public function addProducts()
   {
     return view('admin.HairProductsManage.add');
+  }
+  public function addVideo()
+  {
+    return view('admin.HairVideoManage.add');
   }
 
 
@@ -147,6 +156,46 @@ class AdminController extends Controller
     $image->delete();
     return back()->with('success', 'Image deleted!');
   }
+  public function imageStyleRemove($id)
+  {
+    $image = Image::find($id);
+    if (!$image) abort(404);
+    unlink(public_path(('hair_style_image/' . $image->image)));
+    $image->delete();
+    return back()->with('success', 'Image deleted!');
+  }
+  public function imageColorRemove($id)
+  {
+    $image = Image::find($id);
+    if (!$image) abort(404);
+    unlink(public_path(('hair_color_image/' . $image->image)));
+    $image->delete();
+    return back()->with('success', 'Image deleted!');
+  }
+  public function imageCareRemove($id)
+  {
+    $image = Image::find($id);
+    if (!$image) abort(404);
+    unlink(public_path(('hair_care_image/' . $image->image)));
+    $image->delete();
+    return back()->with('success', 'Image deleted!');
+  }
+  public function imageProductsRemove($id)
+  {
+    $image = Image::find($id);
+    if (!$image) abort(404);
+    unlink(public_path(('hair_products_image/' . $image->image)));
+    $image->delete();
+    return back()->with('success', 'Image deleted!');
+  }
+  public function imageVideoRemove($id)
+  {
+    $image = Image::find($id);
+    if (!$image) abort(404);
+    unlink(public_path(('hair_video_image/' . $image->image)));
+    $image->delete();
+    return back()->with('success', 'Image deleted!');
+  }
 
 
   public function store(Request $request)
@@ -183,7 +232,6 @@ class AdminController extends Controller
 
     return redirect()->route('admin.hair-manage')->with('success', 'Add');
   }
-
   public function storeStyle(Request $request)
   {
 
@@ -218,7 +266,6 @@ class AdminController extends Controller
 
     return redirect()->route('admin.hair-style')->with('success', 'Add');
   }
-
   public function storeColor(Request $request)
   {
 
@@ -253,7 +300,6 @@ class AdminController extends Controller
 
     return redirect()->route('admin.hair-color')->with('success', 'Add');
   }
-
   public function storeCare(Request $request)
   {
 
@@ -288,7 +334,6 @@ class AdminController extends Controller
 
     return redirect()->route('admin.hair-care')->with('success', 'Add');
   }
-
   public function storeProducts(Request $request)
   {
 
@@ -322,6 +367,39 @@ class AdminController extends Controller
     }
 
     return redirect()->route('admin.hair-products')->with('success', 'Add');
+  }
+  public function storeVideo(Request $request)
+  {
+
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'description' => 'required'
+    ]);
+
+    $new_hairStyle = Hair::create(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 5,
+        'sub_category' => 0,
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_video_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $new_hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-video')->with('success', 'Add');
   }
 
   public function view($id)
@@ -364,6 +442,11 @@ class AdminController extends Controller
   {
     $hair = Hair::find($id);
     return view('admin.HairProductsManage.edit', compact('hair'));
+  }
+  public function editVideo($id)
+  {
+    $hair = Hair::find($id);
+    return view('admin.HairVideoManage.edit', compact('hair'));
   }
 
   public function update(Request $request, $id)
@@ -551,6 +634,42 @@ class AdminController extends Controller
 
     return redirect()->route('admin.hair-products')->with('success', 'Update');
   }
+  public function updateVideo(Request $request, $id)
+  {
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'description' => 'required'
+    ]);
+
+    $hairStyle = Hair::findOrFail($id);
+
+    if (!$hairStyle) abort(404);
+
+    $hairStyle->update(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 5,
+        'sub_category' => 0,
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_video_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-video')->with('success', 'Update');
+  }
 
   public function delete($id)
   {
@@ -578,6 +697,7 @@ class AdminController extends Controller
   {
     $request->validate([
       'shop_name' => 'required',
+      'description' => 'required',
       'status' => 'required',
       'phone_number' => 'required',
       'open_hours' => 'required',
@@ -596,6 +716,7 @@ class AdminController extends Controller
 
     Shop::create([
       'shop_name' => $request['shop_name'],
+      'description' => $request['description'],
       'status' => $request['status'],
       'phone_number' => $request['phone_number'],
       'open_hours' => $request['open_hours'],

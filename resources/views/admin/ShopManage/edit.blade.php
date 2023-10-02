@@ -1,6 +1,6 @@
 <x-app-layout>
   <x-slot name="header">
-    <div>
+    <div class="flex justify-between">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         {{ __('แก้ไขร้าน') }}
       </h2>
@@ -8,8 +8,8 @@
     </div>
   </x-slot>
 
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+  <div class="py-4">
+    <div class="max-w-7xl mx-auto sm:px-4 lg:px-6">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">
           <div>
@@ -33,6 +33,12 @@
                 <label for="shop_name" class="block text-sm font-medium leading-6 text-gray-900">ชื่อร้าน</label>
                 <input type="text" name="shop_name" placeholder="ดรีมเวิลด์ ซาลอน"
                        value="{{ old('shop_name', $shop->shop_name) }}"
+                       class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              </div>
+              <div class="mb-4">
+                <label for="description" class="block text-sm font-medium leading-6 text-gray-900">คำอธิบาย</label>
+                <input type="text" name="description" placeholder="อธิบายร้าน"
+                       value="{{ old('description', $shop->description) }}"
                        class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
               <div class="mb-4 flex gap-4">

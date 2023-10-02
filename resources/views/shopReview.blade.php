@@ -46,7 +46,7 @@
         <div class="d-flex gap-3 mb-2">
           @if($review->user->profile !== null)
             <div class="avatar">
-              <img src="/profile_image/{{$review->user->profile}}"/>
+              <img src="/profile_image/{{$review->user->profile}}" alt="profile"/>
             </div>
           @else
             <div class="avatar">

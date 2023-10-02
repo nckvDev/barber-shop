@@ -25,6 +25,11 @@
                 <input type="text" name="shop_name" placeholder="ดรีมเวิลด์ ซาลอน"
                        class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
+              <div class="mb-4">
+                <label for="description" class="block text-sm font-medium leading-6 text-gray-900">คำอธิบาย</label>
+                <input type="text" name="description" placeholder="อธิบายร้าน"
+                       class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              </div>
               <div class="mb-4 flex gap-4">
                 <div class="grow">
                   <label for="status" class="block text-sm font-medium leading-6 text-gray-900">สถานะเปิด-ปิด</label>

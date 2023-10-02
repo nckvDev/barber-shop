@@ -34,49 +34,51 @@
       {{$hair->sub_title}}
     </p>
   </div>
-  <section class="_gallery">
-    <div
-      class="swiper mySwiper swiper-container-thumbs slider-container thumbs-slider d-none d-md-block bg-white swiper-container-initialized swiper-container-horizontal">
-      <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-        @foreach($images as $image)
-          <div class="swiper-slide slide swiper-slide-visible"
-               style="width: 75.625px; margin-right: 15px;">
-            @if($hair->category === 0)
-              <img src="/hair_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
-            @elseif($hair->category === 1)
-              <img src="/hair_style_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
-            @elseif($hair->category === 2)
-              <img src="/hair_color_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
-            @elseif($hair->category === 3)
-              <img src="/hair_care_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
-            @elseif($hair->category === 4)
-              <img src="/hair_products_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
-            @endif
-          </div>
-        @endforeach
-      </div>
-    </div>
-
-    <div
-      class="swiper mySwiper2 swiper-container slider-container main-slider swiper-container-initialized swiper-container-horizontal">
-      <div class="swiper-wrapper">
-        @foreach($images as $image)
-          <div class="swiper-slide slide d-flex flex-column swiper-slide-active" aria-hidden="false"
-               style="width: 710px;">
-            <div class="slider-img d-flex">
-              <figure class="img-wrapper">
-                <img src="/hair_image/{{$image->image}}" alt="{{$hair->title}}"/>
-              </figure>
+  @if($hair->category !== 5)
+    <section class="_gallery">
+      <div
+        class="swiper mySwiper swiper-container-thumbs slider-container thumbs-slider d-none d-md-block bg-white swiper-container-initialized swiper-container-horizontal">
+        <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+          @foreach($images as $image)
+            <div class="swiper-slide slide swiper-slide-visible"
+                 style="width: 75.625px; margin-right: 15px;">
+              @if($hair->category === 0)
+                <img src="/hair_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+              @elseif($hair->category === 1)
+                <img src="/hair_style_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+              @elseif($hair->category === 2)
+                <img src="/hair_color_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+              @elseif($hair->category === 3)
+                <img src="/hair_care_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+              @elseif($hair->category === 4)
+                <img src="/hair_products_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+              @endif
             </div>
-          </div>
-        @endforeach
+          @endforeach
+        </div>
       </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-    </div>
 
-  </section>
-  <section>
+      <div
+        class="swiper mySwiper2 swiper-container slider-container main-slider swiper-container-initialized swiper-container-horizontal">
+        <div class="swiper-wrapper">
+          @foreach($images as $image)
+            <div class="swiper-slide slide d-flex flex-column swiper-slide-active" aria-hidden="false"
+                 style="width: 710px;">
+              <div class="slider-img d-flex">
+                <figure class="img-wrapper">
+                  <img src="/hair_image/{{$image->image}}" alt="{{$hair->title}}"/>
+                </figure>
+              </div>
+            </div>
+          @endforeach
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+
+    </section>
+    <section>
+  @endif
     <div class="mt-2 content">
       <div class="mt-4 mb-0 ">
         <div class="fr-view">
