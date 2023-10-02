@@ -534,6 +534,10 @@ span a:hover {
   z-index: 1;
 }
 
+.mySwiper {
+  height: 100px;
+}
+
 @media (min-width: 768px) {
   ._gallery .mySwiper .slide.swiper-slide-thumb-active {
     opacity: 1;
@@ -617,7 +621,8 @@ span a:hover {
 
 img, figure {
   max-width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 .header-bar {

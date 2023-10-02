@@ -40,6 +40,9 @@
           <h3>
             <a href="{{url('/shop/'.$shop->id)}}">ดรีมเวิลด์ ซาลอน</a>
           </h3>
+          <p>
+            {{$shop->description}}
+          </p>
           <p
             class="{{$shop->status === 'active' ? 'text-success' : 'text-danger'}}">{{$shop->status === 'active' ? 'เปิดอยู่' : 'ปิดอยู่'}}</p>
         </div>

@@ -35,6 +35,9 @@
     <div class="col-8 d-flex align-items-center px-4">
       <div>
         <h3>{{ $shop->shop_name }}</h3>
+        <p>
+          {{$shop->description}}
+        </p>
         <p
           class="{{ $shop->status === 'active' ? 'text-success' : 'text-danger' }}">{{ $shop->status === 'active' ? 'เปิดอยู่' : 'ปิดอยู่' }}
         </p>

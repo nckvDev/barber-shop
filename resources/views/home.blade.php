@@ -55,8 +55,22 @@
           <div class="swiper-slide">
             @foreach($hair->getOneImage as $image)
               <div class="image-wrapper">
-                <img src="/hair_image/{{$image->image}}" alt="{{$hair->sub_title}}"
-                     class="w-100 h-100 object-fit-cover">
+                @if($hair->category === 0)
+                  <img src="/hair_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                       class="w-100 h-100 object-fit-cover">
+                @elseif($hair->category === 1)
+                  <img src="/hair_style_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                       class="w-100 h-100 object-fit-cover">
+                @elseif($hair->category === 2)
+                  <img src="/hair_color_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                       class="w-100 h-100 object-fit-cover">
+                @elseif($hair->category === 3)
+                  <img src="/hair_care_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                       class="w-100 h-100 object-fit-cover">
+                @elseif($hair->category === 4)
+                  <img src="/hair_products_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                       class="w-100 h-100 object-fit-cover">
+                @endif
               </div>
             @endforeach
             <div class="text-wrapper text-md-center p-7 pt-lg-0 mt-lg-8 mx-auto">
@@ -91,16 +105,34 @@
     <h1 class="mb-4"><em>เทรนด์ทรงผม</em></h1>
     <div>
       <div class="row">
-        @foreach($hairTop as $hair)
+        @foreach($hairs as $hair)
           <div class="col-4 mb-4">
             <div class="p-3 card-gallery">
               @foreach($hair->getOneImage as $image)
                 <div class="ratio ratio-16x9 mb-3">
-                  <img src="/hair_image/{{$image->image}}" alt="{{$hair->sub_title}}"
-                       class="w-100 h-100 object-fit-cover rounded-1">
+                  @if($hair->category === 0)
+                    <img src="/hair_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                         class="w-100 h-100 object-fit-cover rounded-1">
+                  @elseif($hair->category === 1)
+                    <img src="/hair_style_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                         class="w-100 h-100 object-fit-cover rounded-1">
+                  @elseif($hair->category === 2)
+                    <img src="/hair_color_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                         class="w-100 h-100 object-fit-cover rounded-1">
+                  @elseif($hair->category === 3)
+                    <img src="/hair_care_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                         class="w-100 h-100 object-fit-cover rounded-1">
+                  @elseif($hair->category === 4)
+                    <img src="/hair_products_image/{{$image->image}}" alt="{{$hair->sub_title}}"
+                         class="w-100 h-100 object-fit-cover rounded-1">
+                  @endif
                 </div>
               @endforeach
+                @if($hair->category === 0 || $hair->category === 1 || $hair->category === 2 || $hair->category === 3 || $hair->category === 4)
               <span>แกลลอรี่</span>
+                @else
+              <span>วิดีโอ</span>
+                @endif
               <p class="fs-4 mb-0">
                 <a href="/hair/{{$hair->id}}" class="text-decoration-none text-dark">
                   {{ $hair->title }}

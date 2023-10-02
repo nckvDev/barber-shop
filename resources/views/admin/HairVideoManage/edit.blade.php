@@ -2,7 +2,7 @@
   <x-slot name="header">
     <div class="flex justify-between">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('แก้ไขทรงผม') }}
+        {{ __('แก้ไขผลิตภัณฑ์ดูแลผม') }}
       </h2>
       <div>{{ Auth::user()->name }}</div>
     </div>
@@ -13,7 +13,7 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">
           <div>
-            <form action="{{ url('/admin/hair-update/'.$hair->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/admin/hair-video-update/'.$hair->id) }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="mb-4">
                 <label for="title" class="block text-sm font-medium leading-6 text-gray-900">หัวข้อ</label>
@@ -25,7 +25,7 @@
                 <input type="text" name="sub_title" value="{{$hair->sub_title}}"
                        class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
-              <div class="mb-4 flex gap-4">
+              <div >
 {{--                <div class="grow">--}}
 {{--                  <label for="category" class="block text-sm font-medium leading-6 text-gray-900">Category</label>--}}
 {{--                  <select name="category"--}}
@@ -41,19 +41,19 @@
 {{--                    <option value="5" {{old('category', $hair->category ) == "5" ? 'selected' : null}}>ร้าน</option>--}}
 {{--                  </select>--}}
 {{--                </div>--}}
-                <div class="grow">
-                  <label for="sub_category"
-                         class="block text-sm font-medium leading-6 text-gray-900">หมวดหมู่ย่อย</label>
-                  <select name="sub_category"
-                          class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    {{--                    <option value="">เลือก</option>--}}
-                    <option value="0" {{old('sub_category', $hair->sub_category ) == "0" ? 'selected' : null}}>
-                      ประเภทผม
-                    </option>
-                    <option value="1" {{old('sub_category', $hair->sub_category ) == "1" ? 'selected' : null}}>รูปหน้า
-                    </option>
-                  </select>
-                </div>
+{{--                <div class="grow">--}}
+{{--                  <label for="sub_category"--}}
+{{--                         class="block text-sm font-medium leading-6 text-gray-900">หมวดหมู่ย่อย</label>--}}
+{{--                  <select name="sub_category"--}}
+{{--                          class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">--}}
+{{--                    --}}{{--                    <option value="">เลือก</option>--}}
+{{--                    <option value="0" {{old('sub_category', $hair->sub_category ) == "0" ? 'selected' : null}}>--}}
+{{--                      ประเภทของผลิตภัณฑ์--}}
+{{--                    </option>--}}
+{{--                    <option value="1" {{old('sub_category', $hair->sub_category ) == "1" ? 'selected' : null}}>แบรนด์--}}
+{{--                    </option>--}}
+{{--                  </select>--}}
+{{--                </div>--}}
               </div>
               <div class="mb-4">
                 <label for="images" class="block text-sm font-medium leading-6 text-gray-900">อัพรูปภาพ</label>
@@ -61,11 +61,10 @@
                 <div class="flex gap-4 mt-4">
                   @foreach($hair->images as $image)
                     <div>
-
-                      <img src="/hair_image/{{$image->image}}" alt="image"
+                      <img src="/hair_video_image/{{$image->image}}" alt="image"
                            style="width: 143px;height: 180px;object-fit: cover;overflow: hidden;">
                       <div class="bg-red-200 px-3 py-2 rounded-md text-center mt-3">
-                        <a href="/admin/image-remove/{{$image->id}}">ลบภาพ</a>
+                        <a href="/admin/image-video-remove/{{$image->id}}">ลบภาพ</a>
                       </div>
                     </div>
                   @endforeach

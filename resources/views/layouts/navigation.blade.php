@@ -12,10 +12,25 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden sm:flex sm:flex-col sm:justify-center sm:items-center gap-4 w-full">
-                  <x-nav-link :href="route('admin.hair-manage')" :active="request()->routeIs('admin.hair-manage')" >
+                  <x-nav-link :href="route('admin.hair-manage')" :active="request()->routeIs('admin.hair-manage') || request()->routeIs('admin.add-hair') || request()->routeIs('admin.edit-hair')" >
+                    {{ __('ทรงผม') }}
+                  </x-nav-link>
+                  <x-nav-link :href="route('admin.hair-style')" :active="request()->routeIs('admin.hair-style') || request()->routeIs('admin.add-hair-style') || request()->routeIs('admin.edit-hair-style')" >
                     {{ __('สไตล์ผม') }}
                   </x-nav-link>
-                  <x-nav-link :href="route('admin.shop-manage')" :active="request()->routeIs('admin.shop-manage')">
+                  <x-nav-link :href="route('admin.hair-color')" :active="request()->routeIs('admin.hair-color') || request()->routeIs('admin.add-hair-color') || request()->routeIs('admin.edit-hair-color')">
+                    {{ __('สีผม') }}
+                  </x-nav-link>
+                  <x-nav-link :href="route('admin.hair-care')" :active="request()->routeIs('admin.hair-care') || request()->routeIs('admin.add-hair-care') || request()->routeIs('admin.edit-hair-care')" >
+                    {{ __('การดูแลผม') }}
+                  </x-nav-link>
+                  <x-nav-link :href="route('admin.hair-products')" :active="request()->routeIs('admin.hair-products') || request()->routeIs('admin.add-hair-products') || request()->routeIs('admin.edit-hair-products')">
+                    {{ __('ผลิตภัณฑ์ดูแลผม') }}
+                  </x-nav-link>
+                  <x-nav-link :href="route('admin.hair-video')" :active="request()->routeIs('admin.hair-video') || request()->routeIs('admin.add-hair-video') || request()->routeIs('admin.edit-hair-video')">
+                    {{ __('วิดีโอ') }}
+                  </x-nav-link>
+                  <x-nav-link :href="route('admin.shop-manage')" :active="request()->routeIs('admin.shop-manage') || request()->routeIs('add-Shop') || request()->routeIs('edit-shop')">
                     {{ __('ร้าน') }}
                   </x-nav-link>
                 </div>

@@ -8,8 +8,8 @@
     </div>
   </x-slot>
 
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+  <div class="py-4">
+    <div class="max-w-7xl mx-auto sm:px-4 lg:px-6 ">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900">
           <div>
@@ -80,7 +80,7 @@
                     <a href="{{ url('/admin/shop-edit/'.$shop->id) }}"
                        class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">แก้ไข</a>
                     <a href="{{ url('/admin/shop-delete/'.$shop->id) }}"
-                       class="text-white font-semibold bg-red-600 rounded-md px-2 py-1 border hover:bg-red-900 transition">ลบ</a>
+                       class="text-white font-semibold bg-red-600 rounded-md px-2 py-1 border hover:bg-red-900 transition delete-confirm">ลบ</a>
                   </div>
                 </td>
 
@@ -91,7 +91,7 @@
               </tr>
             @empty
               <tr>
-                <td colspan="3" class="text-center py-4 bg-gray-100">
+                <td colspan="7" class="text-center py-4 bg-gray-100">
                   No Hair Style
                 </td>
               </tr>
@@ -102,4 +102,34 @@
       </div>
     </div>
   </div>
+  <script>
+    $(function () {
+      $('.delete-confirm').on('click', function (event) {
+        event.preventDefault();
+        const url = $(this).attr('href');
+        Swal.fire({
+          title: 'คุณแน่ใจ?',
+          text: "คุณต้องการลบข้อมูลนี้หรือไม่!",
+          icon: 'warning',
+          focusCancel: true,
+          showCancelButton: true,
+          confirmButtonColor: '#007bff',
+          cancelButtonColor: '#dc3545',
+          confirmButtonText: 'ตกลง',
+          cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = url;
+            // Swal.fire({
+            //   position: 'center',
+            //   icon: 'success',
+            //   title: 'ลบข้อมูลเรียบร้อย',
+            //   showConfirmButton: false,
+            //   timer: 1500
+            // })
+          }
+        })
+      })
+    });
+  </script>
 </x-app-layout>
