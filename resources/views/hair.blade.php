@@ -29,10 +29,10 @@
 <div class="containers containers-sm pb-10 h-100 my-4">
   {{--  @include('components.header')--}}
   <div class="border-bottom border-dark-subtle mb-4">
-      <h1 class="title title-spacing">{{$hair->title}}</h1>
-      <p class="sub-title mb-6 mb-md-10">
-        {{$hair->sub_title}}
-      </p>
+    <h1 class="title title-spacing">{{$hair->title}}</h1>
+    <p class="sub-title mb-6 mb-md-10">
+      {{$hair->sub_title}}
+    </p>
   </div>
   <section class="_gallery">
     <div
@@ -41,7 +41,17 @@
         @foreach($images as $image)
           <div class="swiper-slide slide swiper-slide-visible"
                style="width: 75.625px; margin-right: 15px;">
+            @if($hair->category === 0)
               <img src="/hair_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+            @elseif($hair->category === 1)
+              <img src="/hair_style_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+            @elseif($hair->category === 2)
+              <img src="/hair_color_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+            @elseif($hair->category === 3)
+              <img src="/hair_care_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+            @elseif($hair->category === 4)
+              <img src="/hair_products_image/{{$image->image}}" alt="{{$hair->title}}" width="120px" height="120px"/>
+            @endif
           </div>
         @endforeach
       </div>

@@ -2,7 +2,7 @@
   <x-slot name="header">
     <div class="flex justify-between">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('จัดการทรงผม') }}
+        {{ __('จัดการสไตล์ผม') }}
       </h2>
       <div>{{ Auth::user()->name }}</div>
     </div>
@@ -28,9 +28,9 @@
           </div>
           <div>
             <div class="mb-4">
-              <a href="{{ route('admin.add-hair') }}"
+              <a href="{{ route('admin.add-hair-style') }}"
                  class="rounded-md  bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-                เพิ่มทรงผม
+                เพิ่มสไตล์ผม
               </a>
             </div>
             <table class="min-w-full text-left text-sm font-light">
@@ -66,9 +66,9 @@
                   </td>
                   <td class=" px-6 py-4">
                     <div class="w-max">
-                      <a href="{{ url('/admin/hair-edit/'.$hair->id) }}"
+                      <a href="{{ url('/admin/hair-style-edit/'.$hair->id) }}"
                          class="text-yellow-500 font-semibold border border-yellow-500 rounded-md px-2 py-1 hover:bg-yellow-500 hover:text-white transition">แก้ไข</a>
-                      <a href="{{ url('/admin/hair-delete/'.$hair->id) }}" class="text-white font-semibold bg-red-600 rounded-md px-2 py-1 border hover:bg-red-900 transition delete-confirm">ลบ</a>
+                      <a href="{{ url('/admin/hair-style-delete/'.$hair->id) }}" class="text-white font-semibold bg-red-600 rounded-md px-2 py-1 border hover:bg-red-900 transition delete-confirm">ลบ</a>
                     </div>
                   </td>
                 </tr>
@@ -109,7 +109,7 @@
             //   icon: 'success',
             //   title: 'ลบข้อมูลเรียบร้อย',
             //   showConfirmButton: false,
-            //   timer: 2000
+            //   timer: 3000
             // })
           }
         })

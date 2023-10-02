@@ -6,6 +6,7 @@ use App\Models\Hair;
 use App\Models\Image;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -17,14 +18,61 @@ class AdminController extends Controller
 
   public function Hair()
   {
-    $hairs = Hair::all();
+//    $hairs = Hair::all();
+    $hairs = DB::table('hairs')->where('category', 0)->get();
     return view('admin.HairManage.index', compact('hairs'));
   }
+
+  public function HairStyle()
+  {
+    $hairs = DB::table('hairs')->where('category', 1)->get();
+    return view('admin.HairStyleManage.index', compact('hairs'));
+  }
+
+  public function HairColor()
+  {
+    $hairs = DB::table('hairs')->where('category', 2)->get();
+    return view('admin.HairColorManage.index', compact('hairs'));
+  }
+
+  public function HairCare()
+  {
+    $hairs = DB::table('hairs')->where('category', 3)->get();
+    return view('admin.HairCareManage.index', compact('hairs'));
+  }
+
+  public function HairProducts()
+  {
+    $hairs = DB::table('hairs')->where('category', 4)->get();
+    return view('admin.HairProductsManage.index', compact('hairs'));
+  }
+
 
   public function add()
   {
     return view('admin.HairManage.add');
   }
+
+  public function addStyle()
+  {
+    return view('admin.HairStyleManage.add');
+  }
+
+  public function addColor()
+  {
+    return view('admin.HairColorManage.add');
+  }
+
+  public function addCare()
+  {
+    return view('admin.HairCareManage.add');
+  }
+
+  public function addProducts()
+  {
+    return view('admin.HairProductsManage.add');
+  }
+
 
   public function imageUpload(Request $request)
   {
@@ -59,11 +107,43 @@ class AdminController extends Controller
     }
   }
 
+  public function videoUpload(Request $request)
+  {
+    try {
+      $allowedExts = array("mp4", "webm", "ogg");
+
+      $temp = explode(".", $_FILES["file"]["name"]);
+
+      $extension = end($temp);
+
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
+      $mime = finfo_file($finfo, $_FILES["file"]["tmp_name"]);
+
+      if ((($mime == "video/mp4")
+          || ($mime == "video/webm")
+          || ($mime == "video/ogg"))
+        && in_array($extension, $allowedExts)) {
+        // Generate new random name.
+        $name = sha1(microtime()) . "." . $extension;
+
+        move_uploaded_file($_FILES["file"]["tmp_name"], getcwd() . "/videos/" . $name);
+
+        $response = new \StdClass();
+        $response->link = "/videos/" . $name;
+        echo stripslashes(json_encode($response));
+      }
+    } catch (Exception $e) {
+      Log::error($e->getMessage());
+      return response()->json(['error' => 'An error occurred during file upload'], 500);
+    }
+  }
+
+
   public function imageRemove($id)
   {
     $image = Image::find($id);
-    if(!$image) abort(404);
-    unlink(public_path(('hair_image/'.$image->image)));
+    if (!$image) abort(404);
+    unlink(public_path(('hair_image/' . $image->image)));
     $image->delete();
     return back()->with('success', 'Image deleted!');
   }
@@ -75,12 +155,19 @@ class AdminController extends Controller
     $data = $request->validate([
       'title' => 'required',
       'sub_title' => 'required',
-      'category' => 'required',
       'sub_category' => 'required',
       'description' => 'required'
     ]);
 
-    $new_hairStyle = Hair::create($data);
+    $new_hairStyle = Hair::create(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 0,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
 
     if ($request->has('images')) {
       foreach ($request->file('images') as $image) {
@@ -95,6 +182,146 @@ class AdminController extends Controller
     }
 
     return redirect()->route('admin.hair-manage')->with('success', 'Add');
+  }
+
+  public function storeStyle(Request $request)
+  {
+
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $new_hairStyle = Hair::create(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 1,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_style_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $new_hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-style')->with('success', 'Add');
+  }
+
+  public function storeColor(Request $request)
+  {
+
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $new_hairStyle = Hair::create(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 2,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_color_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $new_hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-color')->with('success', 'Add');
+  }
+
+  public function storeCare(Request $request)
+  {
+
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $new_hairStyle = Hair::create(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 3,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_care_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $new_hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-care')->with('success', 'Add');
+  }
+
+  public function storeProducts(Request $request)
+  {
+
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $new_hairStyle = Hair::create(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 4,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_products_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $new_hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-products')->with('success', 'Add');
   }
 
   public function view($id)
@@ -115,12 +342,35 @@ class AdminController extends Controller
     return view('admin.HairManage.edit', compact('hair'));
   }
 
+  public function editStyle($id)
+  {
+    $hair = Hair::find($id);
+    return view('admin.HairStyleManage.edit', compact('hair'));
+  }
+
+  public function editColor($id)
+  {
+    $hair = Hair::find($id);
+    return view('admin.HairColorManage.edit', compact('hair'));
+  }
+
+  public function editCare($id)
+  {
+    $hair = Hair::find($id);
+    return view('admin.HairCareManage.edit', compact('hair'));
+  }
+
+  public function editProducts($id)
+  {
+    $hair = Hair::find($id);
+    return view('admin.HairProductsManage.edit', compact('hair'));
+  }
+
   public function update(Request $request, $id)
   {
     $data = $request->validate([
       'title' => 'required',
       'sub_title' => 'required',
-      'category' => 'required',
       'sub_category' => 'required',
       'description' => 'required'
     ]);
@@ -129,7 +379,15 @@ class AdminController extends Controller
 
     if (!$hairStyle) abort(404);
 
-    $hairStyle->update($data);
+    $hairStyle->update(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 0,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
 
     if ($request->has('images')) {
       foreach ($request->file('images') as $image) {
@@ -144,6 +402,154 @@ class AdminController extends Controller
     }
 
     return redirect()->route('admin.hair-manage')->with('success', 'Update');
+  }
+  public function updateStyle(Request $request, $id)
+  {
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $hairStyle = Hair::findOrFail($id);
+
+    if (!$hairStyle) abort(404);
+
+    $hairStyle->update(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 1,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_style_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-style')->with('success', 'Update');
+  }
+  public function updateColor(Request $request, $id)
+  {
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $hairStyle = Hair::findOrFail($id);
+
+    if (!$hairStyle) abort(404);
+
+    $hairStyle->update(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 2,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_color_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-color')->with('success', 'Update');
+  }
+  public function updateCare(Request $request, $id)
+  {
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $hairStyle = Hair::findOrFail($id);
+
+    if (!$hairStyle) abort(404);
+
+    $hairStyle->update(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 3,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_care_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-care')->with('success', 'Update');
+  }
+  public function updateProducts(Request $request, $id)
+  {
+    $data = $request->validate([
+      'title' => 'required',
+      'sub_title' => 'required',
+      'sub_category' => 'required',
+      'description' => 'required'
+    ]);
+
+    $hairStyle = Hair::findOrFail($id);
+
+    if (!$hairStyle) abort(404);
+
+    $hairStyle->update(
+      [
+        'title' => $request['title'],
+        'sub_title' => $request['sub_title'],
+        'category' => 4,
+        'sub_category' => $request['sub_category'],
+        'description' => $request['description'],
+      ]
+    );
+
+    if ($request->has('images')) {
+      foreach ($request->file('images') as $image) {
+        $imageName = $data['title'] . '-image-' . time() . rand(1, 1000) . '.' . $image->extension();
+        $image->move(public_path('hair_products_image'), $imageName);
+
+        Image::create([
+          'hair_id' => $hairStyle->id,
+          'image' => $imageName
+        ]);
+      }
+    }
+
+    return redirect()->route('admin.hair-products')->with('success', 'Update');
   }
 
   public function delete($id)

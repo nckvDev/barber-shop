@@ -2,7 +2,7 @@
   <x-slot name="header">
     <div class="flex justify-between">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('เพิ่มสไตล์ผม') }}
+        {{ __('เพิ่มทรงผม') }}
       </h2>
       <div>{{ Auth::user()->name }}</div>
     </div>
@@ -26,19 +26,18 @@
                        class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
               <div class="mb-4 flex gap-4">
-                <div class="grow">
-                  <label for="category" class="block text-sm font-medium leading-6 text-gray-900">หมวดหมู่</label>
-                  <select name="category"
-                          class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <option value="">เลือก</option>
-                    <option value="0">ทรงผม</option>
-                    <option value="1">สไตล์ผม</option>
-                    <option value="2">สีผม</option>
-                    <option value="3">การดูแลผม</option>
-                    <option value="4">ผลิตภัณฑ์ดูแลผม</option>
-{{--                    <option value="5">ร้าน</option>--}}
-                  </select>
-                </div>
+                {{--                <div class="grow">--}}
+                {{--                  <label for="category" class="block text-sm font-medium leading-6 text-gray-900">หมวดหมู่</label>--}}
+                {{--                  <select name="category"--}}
+                {{--                          class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">--}}
+                {{--                    <option value="">เลือก</option>--}}
+                {{--                    <option value="0">ทรงผม</option>--}}
+                {{--                    <option value="1">สไตล์ผม</option>--}}
+                {{--                    <option value="2">สีผม</option>--}}
+                {{--                    <option value="3">การดูแลผม</option>--}}
+                {{--                    <option value="4">ผลิตภัณฑ์ดูแลผม</option>--}}
+                {{--                  </select>--}}
+                {{--                </div>--}}
                 <div class="grow">
                   <label for="sub_category"
                          class="block text-sm font-medium leading-6 text-gray-900">หมวดหมู่ย่อย</label>
@@ -50,16 +49,17 @@
                   </select>
                 </div>
               </div>
-              <div class="mb-4"></div>
+{{--              <div class="mb-4"></div>--}}
+              <div class="mb-4">
+                <label for="images" class="block text-sm font-medium leading-6 text-gray-900">อัพรูปภาพ</label>
+                <input type="file" name="images[]" accept="image/*" multiple>
+              </div>
               <div class="mb-4">
                 <label for="description" class="block text-sm font-medium leading-6 text-gray-900">เนื้อหา</label>
                 <textarea rows="10" name="description" type="text" id="description"
                           class="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
               </div>
-              <div class="mb-4">
-                <label for="images" class="block text-sm font-medium leading-6 text-gray-900">อัพรูปภาพ</label>
-                <input type="file" name="images[]" accept="image/*" multiple>
-              </div>
+
               {{--                <div id="example"></div>--}}
               <div>
                 {{--                  <button type="submit">Submit</button>--}}
@@ -87,13 +87,13 @@
             <script>
               new FroalaEditor('#description', {
                 // imageUploadParam: 'image_param',
-                imageUploadMethod: 'POST',
                 height: 200,
+                imageUploadMethod: 'POST',
                 imageUploadURL: "{{ route('imageUpload') }}",
                 imageUploadParams: {
                   froala: 'true',
                   _token: "{{ csrf_token() }}"
-                }
+                },
               });
             </script>
           </div>

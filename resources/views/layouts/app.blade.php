@@ -28,11 +28,18 @@
     href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
   />
 
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/menu.js'])
   <script src="{{ asset('js/menu.js') }}"></script>
+  <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- CheckBox -->
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100 flex max-w-screen">
@@ -56,5 +63,6 @@
 </div>
 <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
