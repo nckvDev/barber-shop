@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HairController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -104,8 +105,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::get('hair/{id}', [HairController::class, 'hair']);
 
+Route::get('hairs', [HairController::class, 'hairs']);
+Route::get('hairs-style', [HairController::class, 'hairsStyle']);
+Route::get('hairs-color', [HairController::class, 'hairsColor']);
+Route::get('hairs-care', [HairController::class, 'hairsCare']);
+Route::get('hairs-product', [HairController::class, 'hairsProduct']);
+
 Route::get('/shop', [HairController::class, 'shop']);
 Route::get('/shop/{id}', [HairController::class, 'shopDetail']);
 Route::get('/shop/{id}/review', [HairController::class, 'shopReview']);
 
 Route::post('/shop/{id}/review', [HairController::class, 'storeReview'])->name('addReview');
+
+Route::controller(SearchController::class)->group(function(){
+  Route::get('demo-search', 'index');
+  Route::get('autocomplete', 'autocomplete')->name('autocomplete');
+});

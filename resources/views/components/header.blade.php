@@ -26,6 +26,11 @@
     crossorigin="anonymous"
   />
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+
 </head>
 <body>
 <div class="d-flex justify-content-between position-sticky top-0 header-bar bg-white py-2 shadow-sm">
@@ -37,22 +42,15 @@
         </a>
       </h1>
     </div>
-{{--    <div class="search">--}}
-{{--      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">--}}
-{{--        <path--}}
-{{--          fill="currentColor"--}}
-{{--          d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128c0-70.7 57.2-128 128-128c70.7 0 128 57.2 128 128c0 70.7-57.2 128-128 128z"--}}
-{{--        />--}}
-{{--      </svg>--}}
-{{--    </div>--}}
+
   </header>
-  <nav class="menu-bar container-xl w-75">
+  <nav class="menu-bar container-xl w-75 d-flex">
     <ul>
       <li class="dropdown">
         <button onclick="myFunction(1)" class="dropbtnOne">ทรงผม</button>
         <div id="myDropdownOne" class="dropdown-content-one">
           <div>
-            <h5>ประเภทผม</h5>
+            <a href="{{url('/hairs')}}"> <h5>ประเภทผม</h5> </a>
             @foreach($items as $item)
               @if($item->category === 0 && $item->sub_category === 0)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -60,7 +58,7 @@
             @endforeach
           </div>
           <div>
-            <h5>รูปหน้า</h5>
+            <a href="{{url('/hairs')}}"> <h5>รูปหน้า</h5> </a>
             @foreach($items as $item)
               @if($item->category === 0 && $item->sub_category === 1)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -70,10 +68,15 @@
         </div>
       </li>
       <li class="dropdown">
-        <button onclick="myFunction(2)" class="dropbtnTwo">สไตล์ผม</button>
+        <button onclick="myFunction(2)" class="dropbtnTwo">
+          สไตล์ผม
+        </button>
         <div id="myDropdownTwo" class="dropdown-content-two">
           <div>
-            <h5>สไตล์</h5>
+            <a href="{{url('/hairs-style')}}">
+              <h5>สไตล์</h5>
+            </a>
+
             @foreach($items as $item)
               @if($item->category === 1 && $item->sub_category === 0)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -81,7 +84,7 @@
             @endforeach
           </div>
           <div>
-            <h5>รูปหน้า</h5>
+            <a href="{{url('/hairs-style')}}"> <h5>รูปหน้า</h5> </a>
             @foreach($items as $item)
               @if($item->category === 1 && $item->sub_category === 1)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -94,7 +97,7 @@
         <button onclick="myFunction(3)" class="dropbtnThree">สีผม</button>
         <div id="myDropdownThree" class="dropdown-content-three">
           <div>
-            <h5>สีผม</h5>
+            <a href="{{url('/hairs-color')}}"> <h5>สีผม</h5> </a>
             @foreach($items as $item)
               @if($item->category === 2 && $item->sub_category === 0)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -102,7 +105,7 @@
             @endforeach
           </div>
           <div>
-            <h5>เทรนด์สีผม</h5>
+            <a href="{{url('/hairs-color')}}"> <h5>เทรนด์สีผม</h5> </a>
             @foreach($items as $item)
               @if($item->category === 2 && $item->sub_category === 1)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -115,7 +118,7 @@
         <button onclick="myFunction(4)" class="dropbtnFour">การดูแลผม</button>
         <div id="myDropdownFour" class="dropdown-content-four">
           <div>
-            <h5>เคล็ดลับดูแลผม</h5>
+            <a href="{{url('/hairs-care')}}"> <h5>เคล็ดลับดูแลผม</h5> </a>
             @foreach($items as $item)
               @if($item->category === 3 && $item->sub_category === 0)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -123,7 +126,7 @@
             @endforeach
           </div>
           <div>
-            <h5>การดูแลทั่วไป</h5>
+            <a href="{{url('/hairs-care')}}"> <h5>การดูแลทั่วไป</h5> </a>
             @foreach($items as $item)
               @if($item->category === 3 && $item->sub_category === 1)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -136,7 +139,7 @@
         <button onclick="myFunction(5)" class="dropbtnFive">ผลิตภัณฑ์ดูแลผม</button>
         <div id="myDropdownFive" class="dropdown-content-five">
           <div>
-            <h5>ประเภทของผลิตภัณฑ์</h5>
+            <a href="{{url('/hairs-product')}}"> <h5>ประเภทของผลิตภัณฑ์</h5> </a>
             @foreach($items as $item)
               @if($item->category === 4 && $item->sub_category === 0)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -144,7 +147,7 @@
             @endforeach
           </div>
           <div>
-            <h5>แบรนด์</h5>
+            <a href="{{url('/hairs-product')}}">  <h5>แบรนด์</h5> </a>
             @foreach($items as $item)
               @if($item->category === 4 && $item->sub_category === 1)
                 <a href="{{ url('/hair/'.$item->id) }}">{{$item->title}}</a>
@@ -169,8 +172,62 @@
         </div>
       </li>
     </ul>
+    <div class="search">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+        <path
+          fill="currentColor"
+          d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128c0-70.7 57.2-128 128-128c70.7 0 128 57.2 128 128c0 70.7-57.2 128-128 128z"
+        />
+      </svg>
+    </div>
   </nav>
 </div>
+<div class="search-form">
+  <div class="container-input-search">
+    <input type="text" id="autocomplete-input" placeholder="คุณต้องการค้นหาอะไร">
+    <ul id="autocomplete-results"></ul>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $(".search").click(function () {
+      $("div.search-form").slideToggle();
+    });
+  });
+
+  $(document).ready(function () {
+    $('#autocomplete-input').keyup(function () {
+      let query = $(this).val();
+
+      $.ajax({
+        url: '/autocomplete',
+        method: 'GET',
+        data: {query: query},
+        success: function (data) {
+          $('#autocomplete-results').empty();
+
+          $.each(data, function (key, result) {
+            // Create a clickable list item for each result
+            let listItem = $('<li><a href="{{ url("/hair/") }}/' + result.id + '">' + result.title + '</a></li>');
+
+            // Add a click event to handle result selection
+            listItem.find('a').on('click', function () {
+              $('#autocomplete-input').val($(this).text());
+              $('#autocomplete-results').empty();
+
+              // Access the ID with $(this).data('id')
+              let selectedId = result.id;
+              console.log('Selected ID:', selectedId);
+            });
+
+            $('#autocomplete-results').append(listItem);
+          });
+        }
+      });
+    });
+  });
+</script>
 
 <script>
   // const listMenu = ['ทรงผม', 'สไตล์ผม', 'สีผม', 'การดูแลผม', 'ผลิตภัณฑ์ดูแลผม', 'ร้าน']
