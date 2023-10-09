@@ -737,6 +737,7 @@ class AdminController extends Controller
   {
     $request->validate([
       'shop_name' => 'required',
+      'description' => 'required',
       'status' => 'required',
       'phone_number' => 'required',
       'open_hours' => 'required',
@@ -773,6 +774,7 @@ class AdminController extends Controller
     }
 
     $shop->shop_name = $request->input('shop_name');
+    $shop->description = $request->input('description');
     $shop->status = $request->input('status');
     $shop->phone_number = $request->input('phone_number');
     $shop->open_hours = $request->input('open_hours');

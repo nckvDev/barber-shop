@@ -38,7 +38,7 @@
       <div class="col-8 d-flex align-items-center px-4">
         <div>
           <h3>
-            <a href="{{url('/shop/'.$shop->id)}}">ดรีมเวิลด์ ซาลอน</a>
+            <a href="{{url('/shop/'.$shop->id)}}">{{$shop->shop_name}}</a>
           </h3>
           <p>
             {{$shop->description}}
