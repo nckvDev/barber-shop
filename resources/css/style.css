@@ -298,3 +298,12 @@ span a:hover {
   text-decoration: underline;
   color: #1e1e1e;
 }
+
+.search-form .container {
+  background-color: #ff0000;
+  height: 100vh;
+  z-index: 66;
+  overflow: auto;
+  width: 100%;
+  display: none;
+}
